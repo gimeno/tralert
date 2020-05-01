@@ -1,0 +1,12 @@
+{
+  "packages": [
+    "packages/*",
+    "services/*"
+  ],
+  "bootstrap": {
+    "npmClientArgs": [
+      "--no-package-lock"
+    ]
+  },
+  "version": "0.0.0"
+}

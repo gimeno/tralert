@@ -1,0 +1,18 @@
+# Dependencies
+node_modules
+package-lock.json
+
+# Environment varibales
+.env*
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Code coverage
+coverage
+
+# IDE
+.vscode
+.idea

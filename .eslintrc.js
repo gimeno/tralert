@@ -1,0 +1,20 @@
+module.exports = {
+    env: {
+        node: true,
+        jest: true
+    },
+    extends: ['airbnb-base', 'plugin:prettier/recommended', 'plugin:security/recommended', 'plugin:jest/recommended'],
+    plugins: ['prettier', 'security'],
+    parserOptions: {
+        ecmaVersion: 2018
+    },
+    rules: {
+        'security/detect-object-injection': 'off',
+        'no-unused-vars': [
+            'error',
+            {
+                argsIgnorePattern: 'next'
+            }
+        ]
+    }
+};

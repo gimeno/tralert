@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  tralert-transport-service:
+    image: tralert-transport-service
+    container_name: tralert-transport-service
+    build:
+      context: .
+      dockerfile: ./services/transport/Dockerfile
+    environment:
+      - LOGS_TOKEN:${TRANSPORT_LOGS_TOKEN}
+    ports:
+      - "5000:5000"
+
+  tralert-alert-service:
+    image: tralert-alert-service
+    container_name: tralert-alert-service
+    build:
+      context: .
+      dockerfile: ./services/alert/Dockerfile
+    environment:
+      - LOGS_TOKEN:${ALERT_LOGS_TOKEN}
+    ports:
+      - "5001:5000"

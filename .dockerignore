@@ -1,0 +1,9 @@
+.git
+.idea
+.vscode
+node_modules
+packages/*/node_modules
+services/*/node_modules
+services/*/logs
+coverage
+package-lock.json
