@@ -1,0 +1,31 @@
+language: node_js
+
+node_js:
+  - '12'
+
+services:
+  - docker
+
+cache: npm
+
+install:
+  - npm install
+  - npm run bootstrap
+
+script:
+  - npm run lint
+  - npm run coverage
+
+after_success:
+  - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l javascript -r coverage/lcov.info
+
+deploy:
+  # Transport service
+  - provider: script
+    script: bash deploy.sh development transport
+    on:
+      branch: development
+  - provider: script
+    script: bash deploy.sh production transport
+    on:
+      branch: master

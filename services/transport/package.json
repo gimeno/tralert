@@ -1,27 +1,27 @@
 {
-	"name": "@tralert/transport",
-	"version": "1.0.0",
-	"description": "Service to obtain transport data",
-	"scripts": {
-		"start": "node src/server.js",
-		"dev": "nodemon -r dotenv/config --watch ../../packages --watch . src/server.js"
-	},
-	"author": "Roberto Gimeno",
-	"dependencies": {
-		"@hapi/joi": "^17.1.1",
-		"@hapi/joi-date": "^2.0.1",
-		"@tralert/express-app": "^1.0.0",
-		"@tralert/logger": "^1.0.0",
-		"@tralert/middlewares": "^1.0.0",
-		"@tralert/utils": "^1.0.0",
-		"cheerio": "^1.0.0-rc.3",
-		"express": "^4.17.1",
-		"http-status": "^1.4.2",
-		"moment": "^2.24.0",
-		"puppeteer": "^3.0.0"
-	},
-	"devDependencies": {
-		"dotenv": "^8.2.0",
-		"nodemon": "^2.0.3"
-	}
+    "name": "@tralert/transport",
+    "version": "1.0.0",
+    "description": "Service to obtain transport data",
+    "scripts": {
+        "start": "node src/server.js",
+        "dev": "nodemon -r dotenv/config --watch ../../packages --watch . src/server.js"
+    },
+    "author": "Roberto Gimeno",
+    "dependencies": {
+        "@hapi/joi": "^17.1.1",
+        "@hapi/joi-date": "^2.0.1",
+        "@tralert/express-app": "^1.0.0",
+        "@tralert/logger": "^1.0.0",
+        "@tralert/middlewares": "^1.0.0",
+        "@tralert/utils": "^1.0.0",
+        "cheerio": "^1.0.0-rc.3",
+        "express": "^4.17.1",
+        "http-status": "^1.4.2",
+        "moment": "^2.25.3",
+        "puppeteer": "^3.0.2"
+    },
+    "devDependencies": {
+        "dotenv": "^8.2.0",
+        "nodemon": "^2.0.3"
+    }
 }

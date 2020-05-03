@@ -15,6 +15,13 @@ module.exports = {
             {
                 argsIgnorePattern: 'next'
             }
+        ],
+        indent: [
+            'error',
+            4,
+            {
+                SwitchCase: 1
+            }
         ]
     }
 };
