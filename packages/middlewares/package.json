@@ -1,16 +1,16 @@
 {
-  "name": "@tralert/middlewares",
-  "version": "1.0.0",
-  "description": "Common middlewares",
-  "main": "index.js",
-  "author": "Roberto Gimeno",
-  "dependencies": {
-    "@hapi/joi": "^17.1.1",
-    "@tralert/utils": "^1.0.0",
-    "http-status": "^1.4.2",
-    "lodash": "^4.17.15"
-  },
-  "devDependencies": {
-    "node-mocks-http": "^1.8.1"
-  }
+    "name": "@tralert/middlewares",
+    "version": "1.0.0",
+    "description": "Common middlewares",
+    "main": "index.js",
+    "author": "Roberto Gimeno",
+    "dependencies": {
+        "@hapi/joi": "^17.1.1",
+        "@tralert/utils": "^1.0.0",
+        "http-status": "^1.4.2",
+        "lodash": "^4.17.15"
+    },
+    "devDependencies": {
+        "node-mocks-http": "^1.8.1"
+    }
 }

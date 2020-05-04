@@ -1,16 +1,16 @@
 {
-  "name": "@tralert/express-app",
-  "version": "1.0.0",
-  "description": "Common definition of the express api app",
-  "main": "index.js",
-  "author": "Roberto Gimeno",
-  "dependencies": {
-    "@tralert/logger": "^1.0.0",
-    "@tralert/middlewares": "^1.0.0",
-    "compression": "^1.7.4",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "helmet": "^3.22.0",
-    "xss-clean": "^0.1.1"
-  }
+    "name": "@tralert/express-app",
+    "version": "1.0.0",
+    "description": "Common definition of the express api app",
+    "main": "index.js",
+    "author": "Roberto Gimeno",
+    "dependencies": {
+        "@tralert/logger": "^1.0.0",
+        "@tralert/middlewares": "^1.0.0",
+        "compression": "^1.7.4",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "helmet": "^3.22.0",
+        "xss-clean": "^0.1.1"
+    }
 }
