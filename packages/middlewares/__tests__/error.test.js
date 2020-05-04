@@ -11,7 +11,7 @@ describe('Error middlewares', () => {
 
     describe('Error converter', () => {
         test('should return the same ApiError object it was called with', () => {
-            const error = new ApiError(httpStatus.BAD_REQUEST, 'Any error');
+            const error = new ApiError({ message: 'Any error' });
 
             converter(error, httpMocks.createRequest(), httpMocks.createResponse, next);
 
@@ -83,7 +83,7 @@ describe('Error middlewares', () => {
 
     describe('Error handler', () => {
         test('should send proper error response and put the error message in res.locals if there is no stack', () => {
-            const error = new ApiError(httpStatus.BAD_REQUEST, 'Any error');
+            const error = new ApiError({ message: 'Any error' });
             const res = httpMocks.createResponse();
             const sendSpy = jest.spyOn(res, 'json');
 
@@ -94,8 +94,7 @@ describe('Error middlewares', () => {
         });
 
         test('should send proper error response and put the error stack in res.locals if there is stack', () => {
-            const error = new ApiError(httpStatus.BAD_REQUEST, 'Any error');
-            error.stack = 'Stack test';
+            const error = new ApiError({ message: 'Any error', stack: 'Stack test' });
             const res = httpMocks.createResponse();
             const sendSpy = jest.spyOn(res, 'json');
 
