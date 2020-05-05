@@ -1,5 +1,10 @@
 # Tralert
 
+[![Build Status](https://travis-ci.org/gimeno/tralert.svg)](https://travis-ci.org/gimeno/tralert)
+![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/gimeno/tralert)
+![Code Climate coverage](https://img.shields.io/codeclimate/coverage/gimeno/tralert)
+![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/gimeno/tralert)
+
 Tralert is a web application that allows you to set alarms to let you know when a train will be available certain day for the limit price you set.
 
 ## Build with
@@ -15,7 +20,8 @@ These are some of the tools to build the app
 -   @hapi/joi
 -   Puppeteer/Cherio
 -   Travis CI
--   Codacy
+-   Codacy/Codeclimate
+-   Depfu
 -   Docker
 -   Heroku
 
@@ -63,3 +69,5 @@ Firstly, if you want to run services as they were run in production, you have to
 After that run `docker-compose -f docker-compose-prod.yml up`, `docker-compose.yml` is configured to take the previous env variables and inject them into the appropriate container.
 
 ## License
+
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
