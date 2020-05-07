@@ -1,7 +1,8 @@
 const createServer = require('./server');
-const createCommonApiApp = require('./app');
+const { addCommonHeaders, addErrorHandlers } = require('./app');
 
 module.exports = {
     createServer,
-    createCommonApiApp
+    addCommonHeaders,
+    addErrorHandlers
 };

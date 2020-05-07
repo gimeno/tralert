@@ -1,4 +1,3 @@
-const express = require('express');
 const helmet = require('helmet');
 const xss = require('xss-clean');
 const compression = require('compression');
@@ -8,9 +7,7 @@ const { error } = require('@tralert/middlewares');
 
 const { NODE_ENV } = process.env;
 
-function createCommonApiApp(routes) {
-    const app = express();
-
+function addCommonHeaders(express, app) {
     if (NODE_ENV !== 'test') {
         app.use(loggerSuccessHandler);
         app.use(loggerErrorHandler);
@@ -38,12 +35,9 @@ function createCommonApiApp(routes) {
     app.use('/ok', (req, res) => {
         res.send('Working');
     });
+}
 
-    // Api routes
-    if (routes) {
-        app.use(routes);
-    }
-
+function addErrorHandlers(app) {
     // catch 404 and forward to error handler
     app.use(error.routeNotFound);
 
@@ -52,8 +46,9 @@ function createCommonApiApp(routes) {
 
     // handle error
     app.use(error.handler);
-
-    return app;
 }
 
-module.exports = createCommonApiApp;
+module.exports = {
+    addCommonHeaders,
+    addErrorHandlers
+};
