@@ -1,8 +1,8 @@
-const createServer = require('./server');
+const addServerProcessHandlers = require('./server');
 const { addCommonHeaders, addErrorHandlers } = require('./app');
 
 module.exports = {
-    createServer,
+    addServerProcessHandlers,
     addCommonHeaders,
     addErrorHandlers
 };

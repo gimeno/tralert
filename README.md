@@ -16,9 +16,11 @@ These are some of the tools to build the app
 -   Husky/Lint-staged
 -   Jest/Supertest
 -   Express
+-   MongoDB/Mongoose
 -   Winston/Morgan/Sematext
 -   @hapi/joi
 -   Puppeteer/Cherio
+-   Cron/Nodemailer
 -   Travis CI
 -   Codacy/Codeclimate
 -   Depfu
@@ -37,7 +39,17 @@ Configure VSCode
         "editor.foldingStrategy": "indentation",
         "eslint.alwaysShowStatus": true,
         "eslint.lintTask.enable": true,
-        "eslint.run": "onSave"
+        "eslint.run": "onSave",
+        "eslint.workingDirectories": [
+            {
+                "directory": "packages",
+                "changeProcessCWD": true
+            },
+            {
+                "directory": "services",
+                "changeProcessCWD": true
+            }
+        ]
     }
 
 ### Installation
@@ -61,12 +73,17 @@ Create an .env file in each service folder and set the needed env variables
 
 The `start` commands in each service are ready to start as if their environment was ready, because of that the easiest way is to use docker-compose. **The following is just to run production mode locally**, to have this in production the service image can be pulled and create the container with the appropriate env variables.
 
-Firstly, if you want to run services as they were run in production, you have to set the following env variables.
+Firstly, setup this variables in an .env file
 
     TRANSPORT_LOGS_TOKEN
     ALERT_LOGS_TOKEN
+    SMTP_HOST
+    SMTP_PORT
+    SMTP_USERNAME
+    SMTP_PASSWORD
+    EMAIL_FROM
 
-After that run `docker-compose -f docker-compose-prod.yml up`, `docker-compose.yml` is configured to take the previous env variables and inject them into the appropriate container.
+After that run `docker-compose up`, `docker-compose.yml` is configured to take the previous env variables and inject them into the appropriate container.
 
 ## License
 

@@ -4,7 +4,8 @@
     "description": "Service to obtain transport data",
     "scripts": {
         "start": "node src/server.js",
-        "dev": "nodemon -r dotenv/config --watch ../../packages --watch . src/server.js"
+        "dev": "nodemon -r dotenv/config --watch ../../packages --watch . src/server.js",
+        "debug": "nodemon -r dotenv/config --inspect --watch ../../packages --watch . src/server.js"
     },
     "author": "Roberto Gimeno",
     "dependencies": {
