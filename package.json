@@ -7,6 +7,7 @@
         "alert": "npm --prefix services/alert",
         "transport": "npm --prefix services/transport",
         "dev": "lerna run dev --stream",
+        "debug": "lerna run debug --stream",
         "test": "jest tests -i",
         "test:watch": "npm run test -- --watchAll",
         "coverage": "npm run test -- --coverage",

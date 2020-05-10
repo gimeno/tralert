@@ -4,12 +4,27 @@
     "description": "Service to handle alerts",
     "scripts": {
         "start": "node src/server.js",
-        "dev": "nodemon -r dotenv/config --watch ../../packages --watch . src/server.js"
+        "dev": "nodemon -r dotenv/config --watch ../../packages --watch . src/server.js",
+        "debug": "nodemon -r dotenv/config --inspect --watch ../../packages --watch . src/server.js"
     },
     "author": "Roberto Gimeno",
     "dependencies": {
+        "@hapi/joi": "^17.1.1",
+        "@hapi/joi-date": "^2.0.1",
         "@tralert/express-app": "^1.0.0",
-        "express": "^4.17.1"
+        "@tralert/logger": "^1.0.0",
+        "@tralert/middlewares": "^1.0.0",
+        "@tralert/utils": "^1.0.0",
+        "axios": "^0.19.2",
+        "cron": "^1.8.2",
+        "easy-table": "^1.1.1",
+        "express": "^4.17.1",
+        "express-mongo-sanitize": "^2.0.0",
+        "http-status": "^1.4.2",
+        "lodash.pick": "^4.4.0",
+        "moment": "^2.25.3",
+        "mongoose": "^5.9.13",
+        "nodemailer": "^6.4.6"
     },
     "devDependencies": {
         "dotenv": "^8.2.0",

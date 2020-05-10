@@ -1,10 +1,6 @@
 const { logger } = require('@tralert/logger');
 
-function createServer(app, port) {
-    const server = app.listen(port, () => {
-        logger.info(`Listening to port ${port}`);
-    });
-
+function addServerProcessHandlers(server) {
     const exitHandler = () => {
         if (server) {
             server.close(() => {
@@ -32,4 +28,4 @@ function createServer(app, port) {
     });
 }
 
-module.exports = createServer;
+module.exports = addServerProcessHandlers;
