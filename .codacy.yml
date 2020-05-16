@@ -1,2 +1,7 @@
+engines:
+  duplication:
+    exclude_paths:
+      - '**/tests/**'
+
 exclude_paths:
   - '**.json'

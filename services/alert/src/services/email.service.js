@@ -28,6 +28,9 @@ const sendEmail = async (to, subject, text) => {
 };
 
 const sendAlertsEmail = async (to, data) => {
+    if (!to) {
+        return;
+    }
     const tableData = Table.print(data);
     const subject = 'New transports found';
     const text = `Dear user,

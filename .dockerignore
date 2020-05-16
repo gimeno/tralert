@@ -7,6 +7,6 @@ services/*/node_modules
 services/*/logs
 coverage
 logs
-cc-test-reporter
-codacy-coverage
+cc-test-reporter/
+codacy-coverage/
 package-lock.json
