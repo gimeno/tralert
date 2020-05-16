@@ -18,5 +18,5 @@ coverage
 .idea
 
 # Code reporters
-cc-test-reporter
-codacy-coverage
+cc-test-reporter/
+codacy-coverage/

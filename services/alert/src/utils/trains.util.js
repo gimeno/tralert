@@ -18,9 +18,11 @@ const fetchTrainsForAlert = async ({ id, origin, destination, departDate }) => {
         logger.info(`Get trains for alert ${id} - finish`);
         return response.data;
     } catch (err) {
-        logger.error(`Error connection to transport service for alert ${id}`, err);
+        logger.error(`Error connection to transport service for alert ${id}: ${err}`);
         return [];
     }
 };
 
-module.exports = fetchTrainsForAlert;
+module.exports = {
+    fetchTrainsForAlert
+};
