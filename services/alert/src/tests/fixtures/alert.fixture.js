@@ -9,7 +9,7 @@ const pastDepartureDateAlert = {
     departDate: moment().add(-10, 'd'),
     returnDate: moment().add(-2, 'd'),
     price: 5,
-    userId: 'ABC1234'
+    userId: 'auth0|ABC1234'
 };
 
 const nonFoundPreviousTrainAlert = {
@@ -19,7 +19,7 @@ const nonFoundPreviousTrainAlert = {
     departDate: moment().add(1, 'd'),
     returnDate: moment().add(2, 'd'),
     price: 30,
-    userId: 'ABC1234'
+    userId: 'auth0|ABC1234'
 };
 
 const foundPreviousTrainAlert = {
@@ -29,7 +29,7 @@ const foundPreviousTrainAlert = {
     departDate: moment().add(10, 'd'),
     returnDate: moment().add(20, 'd'),
     price: 30,
-    userId: 'ABC1234',
+    userId: 'auth0|ABC1234',
     previousTransports: [
         {
             transportId: 'tren03094',
@@ -46,7 +46,7 @@ const alertFromRandomUser = {
     departDate: moment().add(20, 'd'),
     returnDate: moment().add(21, 'd'),
     price: 30,
-    userId: 'RANDOM_USER123'
+    userId: 'auth0|RANDOMUSER123'
 };
 
 const insertAlerts = async (alerts) => {

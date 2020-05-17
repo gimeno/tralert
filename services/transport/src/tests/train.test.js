@@ -36,7 +36,8 @@ describe('Train routes', () => {
             ];
             getTrainsFromRenfe.mockResolvedValue(expectedArray);
 
-            const res = await request(app).get('/trains').query(query).expect(httpStatus.OK);
+            const res = await request(app).get('/trains').query(query);
+            expect(res.status).toBe(httpStatus.OK);
             expect(res.body.length).toEqual(1);
             expect(res.body).toEqual(expect.arrayContaining(expectedArray));
         });
@@ -44,14 +45,16 @@ describe('Train routes', () => {
         test('should return 200 and an empty array if no data is retrieved', async () => {
             getTrainsFromRenfe.mockResolvedValue([]);
 
-            const res = await request(app).get('/trains').query(query).expect(httpStatus.OK);
+            const res = await request(app).get('/trains').query(query);
+            expect(res.status).toBe(httpStatus.OK);
             expect(res.body).toEqual([]);
         });
 
         test('should return 400 and error message if request data is missing', async () => {
             query = {};
 
-            const res = await request(app).get('/trains').query(query).expect(httpStatus.BAD_REQUEST);
+            const res = await request(app).get('/trains').query(query);
+            expect(res.status).toBe(httpStatus.BAD_REQUEST);
             expect(res.body).toEqual({
                 message: '"from" is required'
             });
@@ -60,7 +63,8 @@ describe('Train routes', () => {
         test('should return 400 and error message if departure date is in the past', async () => {
             query.departDate = moment().add(-2, 'd').format(FORMAT_DATE);
 
-            const res = await request(app).get('/trains').query(query).expect(httpStatus.BAD_REQUEST);
+            const res = await request(app).get('/trains').query(query);
+            expect(res.status).toBe(httpStatus.BAD_REQUEST);
             expect(res.body).toEqual({
                 message: '"departDate" must be greater than "now"'
             });
@@ -69,7 +73,8 @@ describe('Train routes', () => {
         test('should return 400 and error message if return date is smaller than departure date', async () => {
             query.returnDate = moment().add(-2, 'd').format(FORMAT_DATE);
 
-            const res = await request(app).get('/trains').query(query).expect(httpStatus.BAD_REQUEST);
+            const res = await request(app).get('/trains').query(query);
+            expect(res.status).toBe(httpStatus.BAD_REQUEST);
             expect(res.body).toEqual({
                 message: '"returnDate" must be larger than or equal to "ref:departDate"'
             });
@@ -79,7 +84,8 @@ describe('Train routes', () => {
             const errorMessage = 'Async error';
             getTrainsFromRenfe.mockRejectedValue(new Error(errorMessage));
 
-            const res = await request(app).get('/trains').query(query).expect(httpStatus.INTERNAL_SERVER_ERROR);
+            const res = await request(app).get('/trains').query(query);
+            expect(res.status).toBe(httpStatus.INTERNAL_SERVER_ERROR);
             expect(res.body).toHaveProperty('message', errorMessage);
             expect(res.body).toHaveProperty('stack');
         });
