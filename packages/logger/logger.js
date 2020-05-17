@@ -3,7 +3,21 @@ const Logsene = require('winston-logsene');
 
 const { NODE_ENV, LOGS_TOKEN } = process.env;
 
+const enumerateErrorFormat = winston.format((info) => {
+    const formattedInfo = info;
+
+    const { message, error } = info;
+    if (message.error instanceof Error) {
+        formattedInfo.message = message.error.stack;
+    } else if (error instanceof Error) {
+        formattedInfo.message += `\n${error.stack}`;
+    }
+
+    return formattedInfo;
+});
+
 const commonFormat = winston.format.combine(
+    enumerateErrorFormat(),
     winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
     winston.format.splat(),
     winston.format.printf((info) => `${info.timestamp} ${info.level}: ${info.message}`)
@@ -11,7 +25,6 @@ const commonFormat = winston.format.combine(
 
 const transports = [
     new winston.transports.Console({
-        stderrLevels: ['error'],
         format: winston.format.combine(
             NODE_ENV === 'development' ? winston.format.colorize() : winston.format.uncolorize(),
             commonFormat
@@ -37,7 +50,8 @@ if (NODE_ENV === 'production' && LOGS_TOKEN) {
 
 const logger = winston.createLogger({
     level: NODE_ENV === 'development' ? 'debug' : 'info',
-    transports
+    transports,
+    exitOnError: false
 });
 
 if (NODE_ENV === 'production' && !LOGS_TOKEN) {

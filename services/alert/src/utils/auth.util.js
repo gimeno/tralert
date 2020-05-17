@@ -20,8 +20,8 @@ const getUserEmail = async (userId) => {
     try {
         const user = await getAuthClient().getUser({ id: userId });
         return user.email;
-    } catch (err) {
-        logger.error(`Error trying to get user's email: ${err}`);
+    } catch (error) {
+        logger.error("Error trying to get user's email", { error });
         return undefined;
     }
 };

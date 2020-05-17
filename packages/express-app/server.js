@@ -1,20 +1,8 @@
 const { logger } = require('@tralert/logger');
 
 function addServerProcessHandlers(server) {
-    const exitHandler = () => {
-        if (server) {
-            server.close(() => {
-                logger.info('Server closed');
-                process.exit(1);
-            });
-        } else {
-            process.exit(1);
-        }
-    };
-
     const unexpectedErrorHandler = (error) => {
-        logger.error(error);
-        exitHandler();
+        logger.error('Unexpected error', { error });
     };
 
     process.on('uncaughtException', unexpectedErrorHandler);
