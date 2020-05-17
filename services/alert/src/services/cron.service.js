@@ -10,7 +10,6 @@ const handleTrainTransport = async (alert) => {
         return train.trainType.toLowerCase().includes('ave') && parseInt(train.price, 10) <= alert.price;
     };
     const newFoundTrains = [];
-    let wereThereAlreadyFoundTrains = false;
 
     const trains = await trainsUtil.fetchTrainsForAlert(alert);
     trains.forEach((train) => {
@@ -20,7 +19,6 @@ const handleTrainTransport = async (alert) => {
                 alert.previousTransports.push(newTrainData);
                 newFoundTrains.push(train);
             } else {
-                wereThereAlreadyFoundTrains = true;
                 const foundTrainIndex = alert.previousTransports.findIndex(
                     (t) => t.transportId === newTrainData.transportId
                 );
@@ -42,22 +40,26 @@ const handleTrainTransport = async (alert) => {
         await alert.save();
     }
 
-    return {
-        newFoundTrains,
-        wereThereAlreadyFoundTrains
-    };
+    return newFoundTrains;
+};
+
+const communicateNewTransports = async (alert, foundTransports) => {
+    const userEmail = await authUtil.getUserEmail(alert.userId);
+    if (!userEmail) {
+        logger.warn(`No email was found for user ${alert.userId} and alert ${alert.id}`);
+        return;
+    }
+    await emailService.sendAlertsEmail(userEmail, foundTransports);
 };
 
 const handleAlert = async (alert) => {
-    const trainsResult = await handleTrainTransport(alert);
-
-    if (trainsResult.newFoundTrains.length > 0) {
-        const userEmail = await authUtil.getUserEmail(alert.userId);
-        if (!userEmail) {
-            logger.warn(`No email was found for user ${alert.userId} and alert ${alert.id}`);
-            return;
+    try {
+        const foundTrains = await handleTrainTransport(alert);
+        if (foundTrains.length > 0) {
+            await communicateNewTransports(alert, foundTrains);
         }
-        await emailService.sendAlertsEmail(userEmail, trainsResult.newFoundTrains);
+    } catch (error) {
+        logger.error(`Error while handling alert ${alert.id}`, { error });
     }
 };
 
@@ -65,13 +67,7 @@ const cronAlertJobFn = async () => {
     logger.info('Start cron job');
     const alertsToCheck = await alertService.getAlertsDepartDateFromToday();
     logger.info(`Alerts to be checked ${alertsToCheck.length}`);
-    if (alertsToCheck.length > 0) {
-        try {
-            alertsToCheck.forEach(handleAlert);
-        } catch (err) {
-            logger.error(`Error while handling cron job iterating alerts: ${err}`);
-        }
-    }
+    alertsToCheck.forEach(handleAlert);
 };
 
 const createCronJob = (pattern) => {
