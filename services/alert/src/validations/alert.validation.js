@@ -1,11 +1,11 @@
 const Joi = require('@hapi/joi').extend(require('@hapi/joi-date'));
-const { objectId } = require('./custom.validation');
+const { mongoId, auth0Id } = require('./custom.validation');
 
 const FORMAT_DATE = 'DD-MM-YYYY';
 
 const getAlerts = {
     query: Joi.object().keys({
-        userId: Joi.string(),
+        userId: Joi.string().custom(auth0Id),
         sortBy: Joi.string(),
         limit: Joi.number().integer(),
         page: Joi.number().integer()
@@ -14,13 +14,13 @@ const getAlerts = {
 
 const getAlert = {
     params: Joi.object().keys({
-        alertId: Joi.string().custom(objectId)
+        alertId: Joi.string().custom(mongoId).required()
     })
 };
 
 const createAlert = {
     body: Joi.object().keys({
-        userId: Joi.string().required(),
+        userId: Joi.string().custom(auth0Id).required(),
         origin: Joi.string().required(),
         destination: Joi.string().required(),
         departDate: Joi.date().utc().format(FORMAT_DATE).greater('now').required(),
@@ -31,7 +31,7 @@ const createAlert = {
 
 const updateAlert = {
     params: Joi.object().keys({
-        alertId: Joi.required().custom(objectId)
+        alertId: Joi.string().custom(mongoId).required()
     }),
     body: Joi.object()
         .keys({
@@ -44,7 +44,7 @@ const updateAlert = {
 
 const deleteAlert = {
     params: Joi.object().keys({
-        alertId: Joi.string().custom(objectId)
+        alertId: Joi.string().custom(mongoId).required()
     })
 };
 

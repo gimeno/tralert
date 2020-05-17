@@ -28,13 +28,14 @@ describe('Alert routes', () => {
                 departDate: moment().add(1, 'd').format(FORMAT_DATE),
                 returnDate: moment().add(2, 'd').format(FORMAT_DATE),
                 price: 100,
-                userId: 'NewABC1234'
+                userId: 'auth0|NewABC1234'
             };
         });
 
         test('should return 201 and successfully create new alert if data is ok', async () => {
-            const res = await request(app).post('/alerts').send(newAlert).expect(httpStatus.CREATED);
+            const res = await request(app).post('/alerts').send(newAlert);
 
+            expect(res.status).toBe(httpStatus.CREATED);
             expect(res.body).toEqual({
                 id: expect.anything(),
                 destination: newAlert.destination,
@@ -59,9 +60,20 @@ describe('Alert routes', () => {
         test('should return 400 error if userId is missing', async () => {
             delete newAlert.userId;
 
-            const res = await request(app).post('/alerts').send(newAlert).expect(httpStatus.BAD_REQUEST);
+            const res = await request(app).post('/alerts').send(newAlert);
+            expect(res.status).toBe(httpStatus.BAD_REQUEST);
             expect(res.body).toEqual({
                 message: '"userId" is required'
+            });
+        });
+
+        test('should return 400 error if userId is not auth0 id', async () => {
+            newAlert.userId = 'fakeid';
+
+            const res = await request(app).post('/alerts').send(newAlert);
+            expect(res.status).toBe(httpStatus.BAD_REQUEST);
+            expect(res.body).toEqual({
+                message: '"userId" must be a valid auth0 id'
             });
         });
     });
@@ -70,7 +82,8 @@ describe('Alert routes', () => {
         test("should return 200 and all users' alerts", async () => {
             await insertAlerts([nonFoundPreviousTrainAlert, foundPreviousTrainAlert, alertFromRandomUser]);
 
-            const res = await request(app).get('/alerts').query().expect(httpStatus.OK);
+            const res = await request(app).get('/alerts').query();
+            expect(res.status).toBe(httpStatus.OK);
             expect(res.body).toBeInstanceOf(Array);
             expect(res.body).toHaveLength(3);
             expect(res.body[0]).toHaveProperty('id', nonFoundPreviousTrainAlert._id.toHexString());
@@ -79,10 +92,8 @@ describe('Alert routes', () => {
         test('should correctly apply filter on userId field', async () => {
             await insertAlerts([nonFoundPreviousTrainAlert, foundPreviousTrainAlert, alertFromRandomUser]);
 
-            const res = await request(app)
-                .get('/alerts')
-                .query({ userId: alertFromRandomUser.userId })
-                .expect(httpStatus.OK);
+            const res = await request(app).get('/alerts').query({ userId: alertFromRandomUser.userId });
+            expect(res.status).toBe(httpStatus.OK);
             expect(res.body).toHaveLength(1);
             expect(res.body[0].id).toBe(alertFromRandomUser._id.toHexString());
         });
@@ -90,7 +101,8 @@ describe('Alert routes', () => {
         test('should correctly sort returned array if descending sort param is specified', async () => {
             await insertAlerts([nonFoundPreviousTrainAlert, foundPreviousTrainAlert, alertFromRandomUser]);
 
-            const res = await request(app).get('/alerts').query({ sortBy: 'departDate:desc' }).expect(httpStatus.OK);
+            const res = await request(app).get('/alerts').query({ sortBy: 'departDate:desc' });
+            expect(res.status).toBe(httpStatus.OK);
             expect(res.body).toHaveLength(3);
             expect(res.body[0].id).toBe(alertFromRandomUser._id.toHexString());
         });
@@ -98,7 +110,8 @@ describe('Alert routes', () => {
         test('should correctly sort returned array if ascending sort param is specified', async () => {
             await insertAlerts([nonFoundPreviousTrainAlert, foundPreviousTrainAlert, alertFromRandomUser]);
 
-            const res = await request(app).get('/alerts').query({ sortBy: 'departDate:asc' }).expect(httpStatus.OK);
+            const res = await request(app).get('/alerts').query({ sortBy: 'departDate:asc' });
+            expect(res.status).toBe(httpStatus.OK);
             expect(res.body).toHaveLength(3);
             expect(res.body[0].id).toBe(nonFoundPreviousTrainAlert._id.toHexString());
         });
@@ -106,7 +119,8 @@ describe('Alert routes', () => {
         test('should limit returned array if limit param is specified', async () => {
             await insertAlerts([nonFoundPreviousTrainAlert, foundPreviousTrainAlert, alertFromRandomUser]);
 
-            const res = await request(app).get('/alerts').query({ limit: 2 }).expect(httpStatus.OK);
+            const res = await request(app).get('/alerts').query({ limit: 2 });
+            expect(res.status).toBe(httpStatus.OK);
             expect(res.body).toHaveLength(2);
             expect(res.body[0].id).toBe(nonFoundPreviousTrainAlert._id.toHexString());
         });
@@ -114,7 +128,8 @@ describe('Alert routes', () => {
         test('should return the correct page if page and limit params are specified', async () => {
             await insertAlerts([nonFoundPreviousTrainAlert, foundPreviousTrainAlert, alertFromRandomUser]);
 
-            const res = await request(app).get('/alerts').query({ page: 2, limit: 2 }).expect(httpStatus.OK);
+            const res = await request(app).get('/alerts').query({ page: 2, limit: 2 });
+            expect(res.status).toBe(httpStatus.OK);
             expect(res.body).toHaveLength(1);
             expect(res.body[0].id).toBe(alertFromRandomUser._id.toHexString());
         });
@@ -124,7 +139,8 @@ describe('Alert routes', () => {
         test('should return 200 and the alert data if the data is ok', async () => {
             await insertAlerts([nonFoundPreviousTrainAlert]);
 
-            const res = await request(app).get(`/alerts/${nonFoundPreviousTrainAlert._id}`).send().expect(httpStatus.OK);
+            const res = await request(app).get(`/alerts/${nonFoundPreviousTrainAlert._id}`).send();
+            expect(res.status).toBe(httpStatus.OK);
             expect(res.body).toEqual({
                 id: nonFoundPreviousTrainAlert._id.toHexString(),
                 origin: nonFoundPreviousTrainAlert.origin,
@@ -157,11 +173,8 @@ describe('Alert routes', () => {
                 price: 100
             };
 
-            const res = await request(app)
-                .patch(`/alerts/${nonFoundPreviousTrainAlert._id}`)
-                .send(updateBody)
-                .expect(httpStatus.OK);
-
+            const res = await request(app).patch(`/alerts/${nonFoundPreviousTrainAlert._id}`).send(updateBody);
+            expect(res.status).toBe(httpStatus.OK);
             expect(res.body).not.toHaveProperty('password');
             expect(res.body).toEqual({
                 id: nonFoundPreviousTrainAlert._id.toHexString(),
@@ -208,8 +221,8 @@ describe('Alert routes', () => {
         test('should return 204 if data is ok', async () => {
             await insertAlerts([nonFoundPreviousTrainAlert]);
 
-            await request(app).delete(`/alerts/${nonFoundPreviousTrainAlert._id}`).send().expect(httpStatus.NO_CONTENT);
-
+            const res = await request(app).delete(`/alerts/${nonFoundPreviousTrainAlert._id}`).send();
+            expect(res.status).toBe(httpStatus.NO_CONTENT);
             const dbAlert = await Alert.findById(nonFoundPreviousTrainAlert._id);
             expect(dbAlert).toBeNull();
         });
