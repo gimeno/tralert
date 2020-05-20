@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const pick = require('lodash.pick');
 const moment = require('moment');
-
-const FORMAT_DATE = 'DD-MM-YYYY';
+const { formatDate } = require('../config/config');
 
 const alertSchema = mongoose.Schema(
     {
@@ -51,8 +50,8 @@ const alertSchema = mongoose.Schema(
 alertSchema.methods.transform = function transform() {
     const alert = this;
     const alertJson = pick(alert.toJSON(), ['id', 'origin', 'destination', 'departDate', 'returnDate', 'price']);
-    alertJson.departDate = moment(alertJson.departDate).format(FORMAT_DATE);
-    alertJson.returnDate = moment(alertJson.returnDate).format(FORMAT_DATE);
+    alertJson.departDate = moment(alertJson.departDate).format(formatDate);
+    alertJson.returnDate = moment(alertJson.returnDate).format(formatDate);
     return alertJson;
 };
 

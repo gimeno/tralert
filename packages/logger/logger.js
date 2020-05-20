@@ -1,7 +1,6 @@
 const winston = require('winston');
 const Logsene = require('winston-logsene');
-
-const { NODE_ENV, LOGS_TOKEN } = process.env;
+const { env, logsToken } = require('@tralert/config');
 
 const enumerateErrorFormat = winston.format((info) => {
     const formattedInfo = info;
@@ -26,7 +25,7 @@ const commonFormat = winston.format.combine(
 const transports = [
     new winston.transports.Console({
         format: winston.format.combine(
-            NODE_ENV === 'development' ? winston.format.colorize() : winston.format.uncolorize(),
+            env === 'development' ? winston.format.colorize() : winston.format.uncolorize(),
             commonFormat
         )
     }),
@@ -39,22 +38,22 @@ const transports = [
     })
 ];
 
-if (NODE_ENV === 'production' && LOGS_TOKEN) {
+if (env === 'production' && logsToken) {
     transports.push(
         new Logsene({
-            token: LOGS_TOKEN,
+            token: logsToken,
             url: 'https://logsene-receiver.eu.sematext.com/_bulk'
         })
     );
 }
 
 const logger = winston.createLogger({
-    level: NODE_ENV === 'development' ? 'debug' : 'info',
+    level: env === 'development' ? 'debug' : 'info',
     transports,
     exitOnError: false
 });
 
-if (NODE_ENV === 'production' && !LOGS_TOKEN) {
+if (env === 'production' && !logsToken) {
     logger.warn('We are in production mode and there is no logs token, logs are not being sent');
 }
 

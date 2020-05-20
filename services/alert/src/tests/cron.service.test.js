@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 const moment = require('moment');
+const { mongoose } = require('../config/config');
 const { cronService, emailService } = require('../services');
 const setupTestDB = require('./setupTestDB');
 const { Alert } = require('../models');
@@ -13,7 +14,7 @@ const {
     insertAlerts
 } = require('./fixtures/alert.fixture');
 
-setupTestDB();
+setupTestDB(mongoose);
 
 jest.mock('../utils/trains.util');
 jest.mock('../utils/auth.util');

@@ -1,21 +1,11 @@
 const nodemailer = require('nodemailer');
 const { logger } = require('@tralert/logger');
 const Table = require('easy-table');
+const { env, email } = require('../config/config');
 
-const { NODE_ENV, SMTP_HOST, SMTP_PORT, SMTP_USERNAME, SMTP_PASSWORD, EMAIL_FROM } = process.env;
-
-const config = {
-    host: SMTP_HOST,
-    port: SMTP_PORT,
-    auth: {
-        user: SMTP_USERNAME,
-        pass: SMTP_PASSWORD
-    }
-};
-
-const transport = nodemailer.createTransport(config);
+const transport = nodemailer.createTransport(email.smtp);
 /* istanbul ignore next */
-if (NODE_ENV !== 'test') {
+if (env !== 'test') {
     transport
         .verify()
         .then(() => logger.info('Connected to email server'))
@@ -23,7 +13,7 @@ if (NODE_ENV !== 'test') {
 }
 
 const sendEmail = async (to, subject, text) => {
-    const msg = { from: EMAIL_FROM, to, subject, text };
+    const msg = { from: email.from, to, subject, text };
     await transport.sendMail(msg);
 };
 

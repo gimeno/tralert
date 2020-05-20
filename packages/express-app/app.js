@@ -2,13 +2,12 @@ const helmet = require('helmet');
 const xss = require('xss-clean');
 const compression = require('compression');
 const cors = require('cors');
+const { env } = require('@tralert/config');
 const { loggerSuccessHandler, loggerErrorHandler } = require('@tralert/logger');
 const { error } = require('@tralert/middlewares');
 
-const { NODE_ENV } = process.env;
-
 function addCommonHeaders(express, app) {
-    if (NODE_ENV !== 'test') {
+    if (env !== 'test') {
         app.use(loggerSuccessHandler);
         app.use(loggerErrorHandler);
     }
