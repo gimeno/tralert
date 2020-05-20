@@ -2,12 +2,11 @@
 const request = require('supertest');
 const httpStatus = require('http-status');
 const moment = require('moment');
+const { formatDate } = require('../config/config');
 const app = require('../app');
 const { getTrainsFromRenfe } = require('../utils/scrapper.util');
 
 jest.mock('../../src/utils/scrapper.util');
-
-const FORMAT_DATE = 'DD-MM-YYYY';
 
 describe('Train routes', () => {
     describe('GET /trains', () => {
@@ -16,8 +15,8 @@ describe('Train routes', () => {
             query = {
                 from: 'Madrid',
                 to: 'Zaragoza',
-                departDate: moment().add(1, 'd').format(FORMAT_DATE),
-                returnDate: moment().add(2, 'd').format(FORMAT_DATE)
+                departDate: moment().add(1, 'd').format(formatDate),
+                returnDate: moment().add(2, 'd').format(formatDate)
             };
         });
 
@@ -61,7 +60,7 @@ describe('Train routes', () => {
         });
 
         test('should return 400 and error message if departure date is in the past', async () => {
-            query.departDate = moment().add(-2, 'd').format(FORMAT_DATE);
+            query.departDate = moment().add(-2, 'd').format(formatDate);
 
             const res = await request(app).get('/trains').query(query);
             expect(res.status).toBe(httpStatus.BAD_REQUEST);
@@ -71,7 +70,7 @@ describe('Train routes', () => {
         });
 
         test('should return 400 and error message if return date is smaller than departure date', async () => {
-            query.returnDate = moment().add(-2, 'd').format(FORMAT_DATE);
+            query.returnDate = moment().add(-2, 'd').format(formatDate);
 
             const res = await request(app).get('/trains').query(query);
             expect(res.status).toBe(httpStatus.BAD_REQUEST);

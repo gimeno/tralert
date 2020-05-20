@@ -1,9 +1,8 @@
 const moment = require('moment');
 const puppeteer = require('puppeteer');
 const $ = require('cheerio');
+const { chromiumPath, formatDate } = require('../config/config');
 
-const { CHROMIUM_PATH } = process.env;
-const FORMAT_DATE = 'DD-MM-YYYY';
 const TRAIN_WEBSITE = 'https://venta.renfe.com/vol/home.do?c=_0bNa';
 
 const selectors = {
@@ -18,9 +17,9 @@ const selectors = {
 const getTrainsFromRenfe = async ({ from, to, departDate }) => {
     // Prepare puppeteer
     let browser;
-    if (CHROMIUM_PATH !== '') {
+    if (chromiumPath !== '') {
         browser = await puppeteer.launch({
-            executablePath: CHROMIUM_PATH,
+            executablePath: chromiumPath,
             args: ['--no-sandbox']
         });
     } else {
@@ -42,7 +41,7 @@ const getTrainsFromRenfe = async ({ from, to, departDate }) => {
     await page.keyboard.down('Shift');
     await page.keyboard.press('Home');
     await page.keyboard.press('Backspace');
-    await page.type(selectors.inputDepartureDate, moment(departDate).format(FORMAT_DATE), { delay: 100 });
+    await page.type(selectors.inputDepartureDate, moment(departDate).format(formatDate), { delay: 100 });
 
     // Click on comprar
     const newPagePromise = new Promise((x) => browser.on('targetcreated', (target) => x(target.page())));

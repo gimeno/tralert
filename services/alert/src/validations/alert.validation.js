@@ -1,7 +1,6 @@
 const Joi = require('@hapi/joi').extend(require('@hapi/joi-date'));
+const { formatDate } = require('../config/config');
 const { mongoId, auth0Id } = require('./custom.validation');
-
-const FORMAT_DATE = 'DD-MM-YYYY';
 
 const getAlerts = {
     query: Joi.object().keys({
@@ -23,8 +22,8 @@ const createAlert = {
         userId: Joi.string().custom(auth0Id).required(),
         origin: Joi.string().required(),
         destination: Joi.string().required(),
-        departDate: Joi.date().utc().format(FORMAT_DATE).greater('now').required(),
-        returnDate: Joi.date().utc().format(FORMAT_DATE).min(Joi.ref('departDate')),
+        departDate: Joi.date().utc().format(formatDate).greater('now').required(),
+        returnDate: Joi.date().utc().format(formatDate).min(Joi.ref('departDate')),
         price: Joi.number().required()
     })
 };
@@ -35,8 +34,8 @@ const updateAlert = {
     }),
     body: Joi.object()
         .keys({
-            departDate: Joi.date().utc().format(FORMAT_DATE).greater('now'),
-            returnDate: Joi.date().utc().format(FORMAT_DATE).min(Joi.ref('departDate')),
+            departDate: Joi.date().utc().format(formatDate).greater('now'),
+            returnDate: Joi.date().utc().format(formatDate).min(Joi.ref('departDate')),
             price: Joi.number()
         })
         .min(1)

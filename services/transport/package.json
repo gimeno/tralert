@@ -11,6 +11,7 @@
     "dependencies": {
         "@hapi/joi": "^17.1.1",
         "@hapi/joi-date": "^2.0.1",
+        "@tralert/config": "^1.0.0",
         "@tralert/express-app": "^1.0.0",
         "@tralert/logger": "^1.0.0",
         "@tralert/middlewares": "^1.0.0",

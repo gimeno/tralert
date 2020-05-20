@@ -1,0 +1,7 @@
+{
+    "name": "@tralert/config",
+    "version": "1.0.0",
+    "description": "Common config vars across packages and services",
+    "main": "commonConfig.js",
+    "author": "Roberto Gimeno"
+}

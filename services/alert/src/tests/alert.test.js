@@ -3,6 +3,7 @@
 const request = require('supertest');
 const httpStatus = require('http-status');
 const moment = require('moment');
+const { mongoose, formatDate } = require('../config/config');
 const app = require('../app');
 const setupTestDB = require('./setupTestDB');
 const { Alert } = require('../models');
@@ -13,9 +14,7 @@ const {
     insertAlerts
 } = require('./fixtures/alert.fixture');
 
-const FORMAT_DATE = 'DD-MM-YYYY';
-
-setupTestDB();
+setupTestDB(mongoose);
 
 describe('Alert routes', () => {
     describe('POST /alerts', () => {
@@ -25,8 +24,8 @@ describe('Alert routes', () => {
             newAlert = {
                 origin: 'newOrigin',
                 destination: 'newDestination',
-                departDate: moment().add(1, 'd').format(FORMAT_DATE),
-                returnDate: moment().add(2, 'd').format(FORMAT_DATE),
+                departDate: moment().add(1, 'd').format(formatDate),
+                returnDate: moment().add(2, 'd').format(formatDate),
                 price: 100,
                 userId: 'auth0|NewABC1234'
             };
@@ -145,8 +144,8 @@ describe('Alert routes', () => {
                 id: nonFoundPreviousTrainAlert._id.toHexString(),
                 origin: nonFoundPreviousTrainAlert.origin,
                 destination: nonFoundPreviousTrainAlert.destination,
-                departDate: moment(nonFoundPreviousTrainAlert.departDate).format(FORMAT_DATE),
-                returnDate: moment(nonFoundPreviousTrainAlert.returnDate).format(FORMAT_DATE),
+                departDate: moment(nonFoundPreviousTrainAlert.departDate).format(formatDate),
+                returnDate: moment(nonFoundPreviousTrainAlert.returnDate).format(formatDate),
                 price: nonFoundPreviousTrainAlert.price
             });
         });
@@ -168,8 +167,8 @@ describe('Alert routes', () => {
         test('should return 200 and successfully update alert if data is ok', async () => {
             await insertAlerts([nonFoundPreviousTrainAlert]);
             const updateBody = {
-                departDate: moment().add(10, 'd').format(FORMAT_DATE),
-                returnDate: moment().add(11, 'd').format(FORMAT_DATE),
+                departDate: moment().add(10, 'd').format(formatDate),
+                returnDate: moment().add(11, 'd').format(formatDate),
                 price: 100
             };
 
@@ -203,7 +202,7 @@ describe('Alert routes', () => {
         });
 
         test('should return 400 error if departureDate is not a valid', async () => {
-            const updateBody = { departDate: moment().add(-10, 'd').format(FORMAT_DATE) };
+            const updateBody = { departDate: moment().add(-10, 'd').format(formatDate) };
             const res = await request(app).patch(`/alerts/${foundPreviousTrainAlert._id}`).send(updateBody);
             expect(res.status).toBe(httpStatus.BAD_REQUEST);
         });

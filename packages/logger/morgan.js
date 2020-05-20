@@ -1,11 +1,10 @@
 const morgan = require('morgan');
+const { env } = require('@tralert/config');
 const logger = require('./logger');
-
-const { NODE_ENV } = process.env;
 
 morgan.token('message', (req, res) => res.locals.errorMessage || '');
 
-const getIpFormat = () => (NODE_ENV === 'production' ? ':remote-addr - ' : '');
+const getIpFormat = () => (env === 'production' ? ':remote-addr - ' : '');
 const successResponseFormat = `${getIpFormat()}:method :url :status - :response-time ms`;
 const errorResponseFormat = `${getIpFormat()}:method :url :status - :response-time ms - message: :message`;
 

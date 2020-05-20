@@ -5,6 +5,7 @@
     "main": "index.js",
     "author": "Roberto Gimeno",
     "dependencies": {
+        "@tralert/config": "^1.0.0",
         "@tralert/logger": "^1.0.0",
         "@tralert/middlewares": "^1.0.0",
         "compression": "^1.7.4",

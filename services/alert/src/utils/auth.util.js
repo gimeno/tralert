@@ -1,16 +1,15 @@
 const { ManagementClient } = require('auth0');
 const { logger } = require('@tralert/logger');
-
-const { AUTH0_DOMAIN, AUTH0_CLIENT_ID, AUTH0_CLIENT_SECRET } = process.env;
+const { auth0 } = require('../config/config');
 
 let authManagementClient;
 
 const getAuthClient = () => {
     if (!authManagementClient) {
         authManagementClient = new ManagementClient({
-            domain: AUTH0_DOMAIN,
-            clientId: AUTH0_CLIENT_ID,
-            clientSecret: AUTH0_CLIENT_SECRET
+            domain: auth0.domain,
+            clientId: auth0.clientId,
+            clientSecret: auth0.clientSecret
         });
     }
     return authManagementClient;

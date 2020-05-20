@@ -1,18 +1,16 @@
 const axios = require('axios').default;
 const moment = require('moment');
 const { logger } = require('@tralert/logger');
-
-const FORMAT_DATE = 'DD-MM-YYYY';
-const transportServiceURL = process.env.TRANSPORT_URL || 'http://localhost:5000/trains';
+const { transportServiceUrl, formatDate } = require('../config/config');
 
 const fetchTrainsForAlert = async ({ id, origin, destination, departDate }) => {
     try {
         logger.info(`Get trains for alert ${id} - start`);
-        const response = await axios.get(transportServiceURL, {
+        const response = await axios.get(transportServiceUrl, {
             params: {
                 from: origin,
                 to: destination,
-                departDate: moment(departDate).format(FORMAT_DATE)
+                departDate: moment(departDate).format(formatDate)
             }
         });
         logger.info(`Get trains for alert ${id} - finish`);
