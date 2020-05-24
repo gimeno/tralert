@@ -6,7 +6,7 @@ const { transportServiceUrl, formatDate } = require('../config/config');
 const fetchTrainsForAlert = async ({ id, origin, destination, departDate }) => {
     try {
         logger.info(`Get trains for alert ${id} - start`);
-        const response = await axios.get(transportServiceUrl, {
+        const response = await axios.get(`${transportServiceUrl}/trains`, {
             params: {
                 from: origin,
                 to: destination,

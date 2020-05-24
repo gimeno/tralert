@@ -25,6 +25,7 @@ These are some of the tools to build the app
 -   Codacy/Codeclimate
 -   Depfu
 -   Docker
+-   Auth0
 -   Heroku
 
 ## Getting started
@@ -61,19 +62,18 @@ Install dependencies
 
 ### Development mode
 
-Create an .env file in each service folder and set the needed env variables
+Create an .env file in each service folder and set the needed env variables (Check README files inside each service to know the needed variables).
 
-    NODE_ENV=development
-    PORT=<whatever port you want the service use, if not set a default port will be used>
+Then you can run these commands
 
 -   `npm run dev` - Runs all services executing each `dev` command inside of each service with `lerna run`
 -   `npm run <service> -- run dev` - Runs a single service
 
 ### Production mode
 
-The `start` commands in each service are ready to start as if their environment was ready, because of that the easiest way is to use docker-compose. **The following is just to run production mode locally**, to have this in production the service image can be pulled and create the container with the appropriate env variables.
+The `start` commands in each service are ready to start services as if their environment was production, if you want to run the whole system at the same time like in a production environment you can use **docker-compose**.
 
-Firstly, setup this variables in an .env file
+Firstly, setup these variables in an .env file
 
     TRANSPORT_LOGS_TOKEN
     ALERT_LOGS_TOKEN
@@ -82,6 +82,9 @@ Firstly, setup this variables in an .env file
     SMTP_USERNAME
     SMTP_PASSWORD
     EMAIL_FROM
+    AUTH0_DOMAIN
+    AUTH0_CLIENT_ID
+    AUTH0_CLIENT_SECRET
 
 After that run `docker-compose up`, `docker-compose.yml` is configured to take the previous env variables and inject them into the appropriate container.
 
