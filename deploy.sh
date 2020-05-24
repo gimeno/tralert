@@ -3,20 +3,40 @@
 environment=${1}
 serviceName=${2}
 
+printHeader() {
+    message="----- ${1^^} -----"
+    size=${#message}
+    lines=""
+
+    i=0
+    while [ "${i}" -lt "${size}" ]
+    do
+        lines="${lines}-"
+        i=$((i + 1))
+    done
+
+    echo "${lines}"
+    echo "${message}"
+    echo "${lines}"
+}
+
+printHeader "DEPLOY SCRIPT - START"
 # Log in to Docker Hub
-echo "${DOCKER_PASSWORD}" | docker login -u "{$DOCKER_USER}" --password-stdin
+echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USER}" --password-stdin
 
 # Docker image name and tags
 IMAGE="${DOCKER_USER}/tralert-${serviceName}-service"
 GIT_VERSION=$(git describe --always --abbrev --tags --long)
 
 # Build, tag and push image
+printHeader "BUILD & PUSH COMMIT IMAGE"
 docker build -t service -f "./services/${serviceName}/Dockerfile" .
 docker tag service "${IMAGE}:${GIT_VERSION}"
 docker push "${IMAGE}:${GIT_VERSION}"
 
 # If env is production image is tagged as latest
-if ["${environment}" == "production"]
+printHeader "CREATE ${environment} TAG"
+if [ "${environment}" == "production" ]
 then
     docker tag service "${IMAGE}:latest"
     docker push "${IMAGE}:latest"
@@ -26,9 +46,9 @@ else
 fi
 
 # If env is dev also deploy to Heroku
-if [ "${environment}" == "development"  ]
+if [ "${environment}" == "development" ]
 then
-
+    printHeader "DEPLOY IMAGE TO HEROKU"
     # Get Heroku cli
     wget -qO- https://toolbelt.heroku.com/install.sh | sh
 
@@ -45,5 +65,7 @@ then
     heroku container:release web --app "${HEROKU_APP_NAME}"
 
 fi
+
+printHeader "DEPLOY SCRIPT - FINISH"
 
 exit 0
