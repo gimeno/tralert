@@ -23,7 +23,7 @@ services:
     environment:
       - LOGS_TOKEN:${ALERT_LOGS_TOKEN}
       - MONGODB_URI=mongodb://tralert-alert-service-db:27017/alerts
-      - TRANSPORT_URL=http://tralert-transport-service:5000/trains
+      - TRANSPORT_SERVICE_URL=http://tralert-transport-service:5000
     ports:
       - '5001:5001'
 
