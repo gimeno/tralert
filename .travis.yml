@@ -36,3 +36,12 @@ deploy:
     script: bash deploy.sh production transport
     on:
       branch: master
+  # Alert service
+  - provider: script
+    script: bash deploy.sh development alert
+    on:
+      branch: development
+  - provider: script
+    script: bash deploy.sh production alert
+    on:
+      branch: master
