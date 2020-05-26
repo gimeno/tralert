@@ -7,6 +7,15 @@
 
 Tralert is a web application that allows you to set alarms to let you know when a train will be available certain day for the limit price you set.
 
+-   [Build with](#build-with)
+-   [Getting started](#getting-started)
+    -   [Local setup](#local-setup)
+    -   [Installation](#installation)
+    -   [Development mode](#development-mode)
+        -   [Docker dev environment](#docker-dev-environment)
+    -   [Production mode](#production-mode)
+-   [License](#license)
+
 ## Build with
 
 These are some of the tools to build the app
@@ -64,10 +73,16 @@ Install dependencies
 
 Create an .env file in each service folder and set the needed env variables (Check README files inside each service to know the needed variables).
 
+To be able to run the dev commands without problems, you'll need to have a local instance of MongoDB running locally.
+
 Then you can run these commands
 
 -   `npm run dev` - Runs all services executing each `dev` command inside of each service with `lerna run`
 -   `npm run <service> -- run dev` - Runs a single service
+
+#### Docker dev environment
+
+You can also use Docker-compose to run your local dev env, this approach will take care of running any needed service such as MongoDB. Simply run `docker-compose up`, `docker-compose.yml` is ready for development.
 
 ### Production mode
 
@@ -86,7 +101,7 @@ Firstly, setup these variables in an .env file
     AUTH0_CLIENT_ID
     AUTH0_CLIENT_SECRET
 
-After that run `docker-compose up`, `docker-compose.yml` is configured to take the previous env variables and inject them into the appropriate container.
+After that run `docker-compose -f docker-compose-prod.yml up`, `docker-compose-prod.yml` is configured to take the previous env variables and inject them into the appropriate container.
 
 ## License
 

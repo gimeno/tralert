@@ -1,34 +1,37 @@
 version: '3'
 
 services:
-  tralert-transport-service:
-    image: tralert-transport-service
-    container_name: tralert-transport-service
+  transport-service:
+    image: transport-service
+    container_name: transport-service-dev
     build:
       context: .
-      dockerfile: ./services/transport/Dockerfile
-    env_file: .env
-    environment:
-      - LOGS_TOKEN:${TRANSPORT_LOGS_TOKEN}
+      dockerfile: ./services/transport/Dockerfile.dev
+    env_file: ./services/transport/.env
     ports:
       - '5000:5000'
+    volumes:
+      - .:/app
+      - /app/node_modules
 
-  tralert-alert-service:
-    image: tralert-alert-service
-    container_name: tralert-alert-service
+  alert-service:
+    image: alert-service
+    container_name: alert-service-dev
     build:
       context: .
-      dockerfile: ./services/alert/Dockerfile
-    env_file: .env
+      dockerfile: ./services/alert/Dockerfile.dev
+    env_file: ./services/alert/.env
     environment:
-      - LOGS_TOKEN:${ALERT_LOGS_TOKEN}
-      - MONGODB_URI=mongodb://tralert-alert-service-db:27017/alerts
-      - TRANSPORT_SERVICE_URL=http://tralert-transport-service:5000
+      - MONGODB_URI=mongodb://alert-service-db:27017/alerts
+      - TRANSPORT_SERVICE_URL=http://transport-service:5000
     ports:
       - '5001:5001'
+    volumes:
+      - .:/app
+      - /app/node_modules
 
-  tralert-alert-service-db:
+  alert-service-db:
     image: mongo
-    container_name: tralert-alert-service-db
+    container_name: alert-service-db-dev
     ports:
       - '27017:27017'
