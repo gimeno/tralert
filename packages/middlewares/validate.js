@@ -1,7 +1,7 @@
 const Joi = require('@hapi/joi');
 const httpStatus = require('http-status');
 const pick = require('lodash.pick');
-const ApiError = require('../utils/ApiError');
+const { ApiError } = require('@tralert/utils');
 
 const validate = (schema) => (req, res, next) => {
     const validSchema = pick(schema, ['params', 'query', 'body']);
