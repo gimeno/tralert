@@ -79,13 +79,10 @@ Create an .env file in each service folder and set the needed env variables (Che
 To be able to run the dev commands without problems, you'll need to have the following running in your local machine:
 
 -   A MongoDB instance
--   Create a docker image based on Express-Gateway with the Dockerfile in `/services/gateway`. To do that execute the below commands in a bash terminal.
-
-```bash
-cd services/gateway/
-./docker-build.sh
-./docker-run.sh
-```
+-   Create a docker image based on Express-Gateway with the Dockerfile in `/services/gateway` and run it. To do that run the following commands from root folder in a bash terminal
+    -   `cd services/gateway/`
+    -   `./docker-build.sh`
+    -   `./docker-run.sh`
 
 Then you can run these commands
 
