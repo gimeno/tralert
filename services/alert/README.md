@@ -62,4 +62,4 @@ For development, you can create `.env` file with the following configuration
 
 Here you can see a diagram of what the cron job does for every alert.
 
-![Cron workflow](images/cronworkflow.png?raw=true)
+![Cron workflow](images/cron-workflow.png?raw=true)

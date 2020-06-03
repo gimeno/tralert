@@ -1,0 +1,48 @@
+http:
+  port: ${PORT:-9080}
+apiEndpoints:
+  transport:
+    path: '/transport*'
+    methods: GET
+  alert:
+    path: '/alert*'
+serviceEndpoints:
+  transport:
+    url: ${TRANSPORT_SERVICE_URL}
+  alert:
+    url: ${ALERT_SERVICE_URL}
+policies:
+  - log
+  - proxy
+  - jwks
+  - request-transformer
+pipelines:
+  transportPipeline:
+    apiEndpoints:
+      - transport
+    policies:
+      - log:
+          action:
+            message: 'Transport ${req.method} ${req.originalUrl}'
+      - proxy:
+          action:
+            serviceEndpoint: transport
+            stripPath: true
+
+  alertPipeline:
+    apiEndpoints:
+      - alert
+    policies:
+      - log:
+          action:
+            message: 'Alert ${req.method} ${req.originalUrl}'
+      - jwks:
+      - request-transformer:
+          action:
+            body:
+              add:
+                userId: req.user.sub
+      - proxy:
+          action:
+            serviceEndpoint: alert
+            stripPath: true

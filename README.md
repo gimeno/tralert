@@ -14,6 +14,7 @@ Tralert is a web application that allows you to set alarms to let you know when 
     -   [Development mode](#development-mode)
         -   [Docker dev environment](#docker-dev-environment)
     -   [Production mode](#production-mode)
+-   [Interact with the APIs](#interact-with-the-apis)
 -   [License](#license)
 
 ## Build with
@@ -35,6 +36,8 @@ These are some of the tools to build the app
 -   Depfu
 -   Docker
 -   Auth0
+-   Postman
+-   Express-Gateway
 -   Heroku
 
 ## Getting started
@@ -73,7 +76,10 @@ Install dependencies
 
 Create an .env file in each service folder and set the needed env variables (Check README files inside each service to know the needed variables).
 
-To be able to run the dev commands without problems, you'll need to have a local instance of MongoDB running locally.
+To be able to run the dev commands without problems, you'll need to have the following running in your local machine:
+
+-   A MongoDB instance
+-   Have installed Docker and run the bash scripts `docker-build.sh` and `docker-run.sh`, these scripts will create a Express-Gateway image and run a container with the needed configuration
 
 Then you can run these commands
 
@@ -82,7 +88,7 @@ Then you can run these commands
 
 #### Docker dev environment
 
-You can also use Docker-compose to run your local dev env, this approach will take care of running any needed service such as MongoDB. Simply run `docker-compose up`, `docker-compose.yml` is ready for development.
+A much quicker approach is to use Docker-compose to run your local dev env, this approach will take care of running any needed service. Simply run `docker-compose up`, `docker-compose.yml` is ready for development.
 
 ### Production mode
 
@@ -98,10 +104,17 @@ Firstly, setup these variables in an .env file
     SMTP_PASSWORD
     EMAIL_FROM
     AUTH0_DOMAIN
+    AUTH0_AUDIENCE
     AUTH0_CLIENT_ID
     AUTH0_CLIENT_SECRET
 
 After that run `docker-compose -f docker-compose-prod.yml up`, `docker-compose-prod.yml` is configured to take the previous env variables and inject them into the appropriate container.
+
+## Interact with the APIs
+
+To send requests to the services with no UI, you can use Postman and import the collections that are in [tests-apis](./tests-apis) folder.
+
+Keep in mind that if you use the API Gateway collection you'll need to generate a valid JWT token from Auth0.
 
 ## License
 
