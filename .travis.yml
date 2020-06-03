@@ -28,28 +28,29 @@ after_success:
 
 deploy:
   # Transport service
-  - provider: script
-    script: bash deploy.sh development transport
-    on:
-      branch: development
-  - provider: script
-    script: bash deploy.sh production transport
-    on:
-      branch: master
-  # Alert service
-  - provider: script
-    script: bash deploy.sh development alert
-    on:
-      branch: development
-  - provider: script
-    script: bash deploy.sh production alert
-    on:
-      branch: master
+#   - provider: script
+#     script: bash deploy.sh development transport
+#     on:
+#       branch: development
+#   - provider: script
+#     script: bash deploy.sh production transport
+#     on:
+#       branch: master
+#   # Alert service
+#   - provider: script
+#     script: bash deploy.sh development alert
+#     on:
+#       branch: development
+#   - provider: script
+#     script: bash deploy.sh production alert
+#     on:
+#       branch: master
   # Api gateway
   - provider: script
     script: bash deploy.sh development gateway
     on:
-      branch: development
+      branch: fix-gateway-deploy
+    #   branch: development
   - provider: script
     script: bash deploy.sh production gateway
     on:

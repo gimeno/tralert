@@ -20,7 +20,7 @@ printHeader() {
     echo "${lines}"
 }
 
-printHeader "DEPLOY SCRIPT - START"
+printHeader "DEPLOY SCRIPT - ${serviceName} SERVICE - START"
 # Log in to Docker Hub
 echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USER}" --password-stdin
 
@@ -66,6 +66,6 @@ then
 
 fi
 
-printHeader "DEPLOY SCRIPT - FINISH"
+printHeader "DEPLOY SCRIPT - ${serviceName} SERVICE - FINISH"
 
 exit 0
