@@ -35,3 +35,18 @@ services:
     container_name: alert-service-db-dev
     ports:
       - '27017:27017'
+
+  gateway-service:
+    image: gateway-service
+    container_name: gateway-service-dev
+    build:
+      context: ./services/gateway
+      dockerfile: Dockerfile
+    env_file: ./services/gateway/.env
+    environment:
+      - TRANSPORT_SERVICE_URL=http://transport-service:5000
+      - ALERT_SERVICE_URL=http://alert-service:5001
+    ports:
+      - '9080:9080'
+    volumes:
+      - ./services/gateway/config/gateway.config.yml:/var/lib/eg/gateway.config.yml

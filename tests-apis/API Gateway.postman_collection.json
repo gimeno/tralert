@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "13c697fe-58bc-4da6-bdde-966a4f2b656d",
+		"name": "API Gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get trains",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9080/transport/trains?from=Madrid&to=Zaragoza&departDate=02-06-2020",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"transport",
+						"trains"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "Madrid"
+						},
+						{
+							"key": "to",
+							"value": "Zaragoza"
+						},
+						{
+							"key": "departDate",
+							"value": "02-06-2020"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create alert",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"origin\": \"Madrid\",\n    \"destination\": \"Zaragoza\",\n    \"departDate\": \"10-06-2020\",\n    \"returnDate\": \"20-06-2020\",\n    \"price\": 60\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9080/alert/alerts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"alert",
+						"alerts"
+					]
+				},
+				"description": "JWT Auth0 token is needed"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all alerts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9080/alert/alerts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"alert",
+						"alerts"
+					]
+				},
+				"description": "JWT Auth0 token is needed"
+			},
+			"response": []
+		},
+		{
+			"name": "Get user alerts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9080/alert/alerts?userId=auth0|5ebe9ca91fbbbb0c88020b6a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"alert",
+						"alerts"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "auth0|5ebe9ca91fbbbb0c88020b6a"
+						}
+					]
+				},
+				"description": "JWT Auth0 token is needed"
+			},
+			"response": []
+		},
+		{
+			"name": "Get alert by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9080/alert/alerts/5ec591bf01a98b2fe009f875",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"alert",
+						"alerts",
+						"5ec591bf01a98b2fe009f875"
+					]
+				},
+				"description": "JWT Auth0 token is needed"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

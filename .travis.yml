@@ -45,3 +45,12 @@ deploy:
     script: bash deploy.sh production alert
     on:
       branch: master
+  # Api gateway
+  - provider: script
+    script: bash deploy.sh development gateway
+    on:
+      branch: development
+  - provider: script
+    script: bash deploy.sh production gateway
+    on:
+      branch: master

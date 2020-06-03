@@ -1,0 +1,103 @@
+{
+	"info": {
+		"_postman_id": "f43228fe-38b7-4e4a-af49-1d89da288cd2",
+		"name": "Alerts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create alert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"origin\": \"Madrid\",\n    \"destination\": \"Zaragoza\",\n    \"departDate\": \"29-05-2020\",\n    \"returnDate\": \"29-05-2020\",\n    \"price\": 60,\n    \"userId\": \"auth0|5ebe9ca91fbbbb0c88020b6a\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5001/alerts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"alerts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all alerts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/alerts/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"alerts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user alerts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/alerts?userId=auth0|5ebe9ca91fbbbb0c88020b6a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"alerts"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "auth0|5ebe9ca91fbbbb0c88020b6a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get alert by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/alerts/5ecae4bee768c30023099fec",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"alerts",
+						"5ecae4bee768c30023099fec"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

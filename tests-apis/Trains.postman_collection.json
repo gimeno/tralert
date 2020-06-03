@@ -1,0 +1,62 @@
+{
+	"info": {
+		"_postman_id": "8be7edb3-ab72-42b6-9c61-af5ecd5eaa69",
+		"name": "Trains",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get trains",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODgwMjAyMTcsImlhdCI6MTU4NjgxMDYxNywidWlkIjoiNWU5NGNkMjQ3YzI1NTU3NjljYmI3MWM4In0.fUnrMjg82w421LbdZB2E0HjjQeRQx9GCIhbf1TUpOno",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/trains?from=Madrid&to=Zaragoza&departDate=29-05-2020",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"trains"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "Madrid"
+						},
+						{
+							"key": "to",
+							"value": "Zaragoza"
+						},
+						{
+							"key": "departDate",
+							"value": "29-05-2020"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
