@@ -6,7 +6,7 @@ module.exports = {
     ...commonConfig,
     port: process.env.PORT || 5001,
     mongoose: {
-        url: `${mongoUrl}${process.env.NODE_ENV === 'test' ? '-test' : ''}`,
+        url: mongoUrl,
         options: {
             useCreateIndex: true,
             useNewUrlParser: true,

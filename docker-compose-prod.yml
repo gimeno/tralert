@@ -26,6 +26,8 @@ services:
       - TRANSPORT_SERVICE_URL=http://tralert-transport-service:5000
     ports:
       - '5001:5001'
+    depends_on:
+      - alert-service-db
 
   tralert-alert-service-db:
     image: mongo

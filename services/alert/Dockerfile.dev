@@ -14,5 +14,5 @@ COPY services/alert ./services/alert
 COPY lerna.json .
 RUN npm run bootstrap
 
-CMD [ "npm", "--prefix", "services/alert", "run", "dev" ]
+CMD [ "npm", "--prefix", "services/alert", "run", "docker:dev" ]
 
