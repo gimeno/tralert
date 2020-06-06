@@ -29,4 +29,4 @@ COPY services/transport ./services/transport
 COPY lerna.json .
 RUN npm run bootstrap
 
-CMD [ "npm", "--prefix", "services/transport", "run", "dev" ]
+CMD [ "npm", "--prefix", "services/transport", "run", "docker:dev" ]

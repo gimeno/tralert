@@ -10,6 +10,7 @@ services:
     env_file: ./services/transport/.env
     ports:
       - '5000:5000'
+      - '9229:9229'
     volumes:
       - .:/app
       - /app/node_modules
@@ -26,9 +27,12 @@ services:
       - TRANSPORT_SERVICE_URL=http://transport-service:5000
     ports:
       - '5001:5001'
+      - '9230:9229'
     volumes:
       - .:/app
       - /app/node_modules
+    depends_on:
+      - alert-service-db
 
   alert-service-db:
     image: mongo
