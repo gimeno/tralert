@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 const request = require('supertest');
 const httpStatus = require('http-status');
 const moment = require('moment');

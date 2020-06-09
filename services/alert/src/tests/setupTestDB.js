@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 const { MongoMemoryServer } = require('mongodb-memory-server');
 const mongoose = require('mongoose');
 
@@ -26,7 +25,9 @@ const closeDatabase = async () => {
  * Remove all the data for all db collections.
  */
 const clearDatabase = async () => {
-    await Promise.all(Object.values(mongoose.connection.collections).map(async (collection) => collection.deleteMany()));
+    await Promise.all(
+        Object.values(mongoose.connection.collections).map(async (collection) => collection.deleteMany())
+    );
 };
 
 const setupTestDB = (mongooseConfig) => {
