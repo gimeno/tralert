@@ -3,8 +3,12 @@ module.exports = {
         node: true,
         jest: true
     },
-    extends: ['airbnb-base', 'plugin:prettier/recommended', 'plugin:security/recommended', 'plugin:jest/recommended'],
-    plugins: ['prettier', 'security'],
+    extends: [
+        'airbnb-base',
+        'plugin:prettier/recommended',
+        'plugin:security/recommended',
+        'plugin:jest/recommended'
+    ],
     parserOptions: {
         ecmaVersion: 2018
     },
@@ -22,6 +26,7 @@ module.exports = {
             {
                 SwitchCase: 1
             }
-        ]
+        ],
+        'import/no-extraneous-dependencies': 'off'
     }
 };

@@ -23,9 +23,14 @@ For development, you can create `.env` file with the following configuration
 
     LOG_LEVEL=debug
     DEBUG=express-gateway-plugin-jwks:jwks-policy
-
     TRANSPORT_SERVICE_URL=http://<YOUR_URL>:5000/
     ALERT_SERVICE_URL=http://<YOUR_URL>:5001/
-
     AUTH0_DOMAIN=<YOUR AUTH0 DOMAIN>
     AUTH0_AUDIENCE=<YOUR AUTH0 AUDIENCE>
+
+For production, you need to set:
+
+    TRANSPORT_SERVICE_URL
+    ALERT_SERVICE_URL
+    AUTH0_DOMAIN
+    AUTH0_AUDIENCE

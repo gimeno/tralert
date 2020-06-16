@@ -2,3 +2,4 @@ node_modules
 coverage
 *.yml
 /tests-apis
+.eslintrc.js

@@ -1,36 +1,36 @@
 {
-    "name": "@tralert/alert",
-    "version": "1.0.0",
-    "description": "Service to handle alerts",
-    "scripts": {
-        "start": "node src/server.js",
-        "dev": "nodemon -r dotenv/config --watch ../../packages --watch . src/server.js",
-        "debug": "nodemon -r dotenv/config --inspect --watch ../../packages --watch . src/server.js",
-        "docker:dev": "nodemon -r dotenv/config --inspect=0.0.0.0 --watch ../../packages --watch . src/server.js"
-    },
-    "author": "Roberto Gimeno",
-    "dependencies": {
-        "@hapi/joi": "^17.1.1",
-        "@hapi/joi-date": "^2.0.1",
-        "@tralert/config": "^1.0.0",
-        "@tralert/express-app": "^1.0.0",
-        "@tralert/logger": "^1.0.0",
-        "@tralert/middlewares": "^1.0.0",
-        "@tralert/utils": "^1.0.0",
-        "auth0": "^2.26.0",
-        "axios": "^0.19.2",
-        "cron": "^1.8.2",
-        "easy-table": "^1.1.1",
-        "express": "^4.17.1",
-        "express-mongo-sanitize": "^2.0.0",
-        "http-status": "^1.4.2",
-        "lodash.pick": "^4.4.0",
-        "moment": "^2.26.0",
-        "mongoose": "^5.9.18",
-        "nodemailer": "^6.4.8"
-    },
-    "devDependencies": {
-        "dotenv": "^8.2.0",
-        "nodemon": "^2.0.4"
-    }
+  "name": "@tralert/alert",
+  "version": "1.0.0",
+  "description": "Service to handle alerts",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon -r dotenv/config --watch ../../packages --watch . src/server.js",
+    "debug": "nodemon -r dotenv/config --inspect --watch ../../packages --watch . src/server.js",
+    "docker:dev": "nodemon -r dotenv/config --inspect=0.0.0.0 --watch ../../packages --watch . src/server.js"
+  },
+  "author": "Roberto Gimeno",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "@hapi/joi-date": "^2.0.1",
+    "@tralert/config": "^1.0.0",
+    "@tralert/express-app": "^1.0.0",
+    "@tralert/logger": "^1.0.0",
+    "@tralert/middlewares": "^1.0.0",
+    "@tralert/utils": "^1.0.0",
+    "auth0": "^2.26.0",
+    "axios": "^0.19.2",
+    "cron": "^1.8.2",
+    "easy-table": "^1.1.1",
+    "express": "^4.17.1",
+    "express-mongo-sanitize": "^2.0.0",
+    "http-status": "^1.4.2",
+    "lodash.pick": "^4.4.0",
+    "moment": "^2.26.0",
+    "mongoose": "^5.9.18",
+    "nodemailer": "^6.4.8"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.4"
+  }
 }

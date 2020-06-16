@@ -1,12 +1,10 @@
 const commonConfig = require('@tralert/config');
 
-const mongoUrl = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/alerts';
-
 module.exports = {
     ...commonConfig,
     port: process.env.PORT || 5001,
     mongoose: {
-        url: mongoUrl,
+        url: process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/alerts',
         options: {
             useCreateIndex: true,
             useNewUrlParser: true,

@@ -100,7 +100,9 @@ describe('Error middlewares', () => {
 
             handler(error, httpMocks.createRequest(), res);
 
-            expect(sendSpy).toHaveBeenCalledWith(expect.objectContaining({ message: error.message, stack: error.stack }));
+            expect(sendSpy).toHaveBeenCalledWith(
+                expect.objectContaining({ message: error.message, stack: error.stack })
+            );
             expect(res.locals.errorMessage).toBe(error.stack);
         });
     });

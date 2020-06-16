@@ -1,13 +1,13 @@
 {
-    "name": "@tralert/logger",
-    "version": "1.0.0",
-    "description": "Logger configuration for the services",
-    "main": "index.js",
-    "author": "Roberto Gimeno",
-    "dependencies": {
-        "@tralert/config": "^1.0.0",
-        "morgan": "^1.10.0",
-        "winston": "^3.2.1",
-        "winston-logsene": "^2.0.8"
-    }
+  "name": "@tralert/logger",
+  "version": "1.0.0",
+  "description": "Logger configuration for the services",
+  "main": "index.js",
+  "author": "Roberto Gimeno",
+  "dependencies": {
+    "@tralert/config": "^1.0.0",
+    "morgan": "^1.10.0",
+    "winston": "^3.2.1",
+    "winston-logsene": "^2.0.8"
+  }
 }

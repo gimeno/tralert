@@ -11,6 +11,7 @@ Tralert is a web application that allows you to set alarms to let you know when 
 -   [Getting started](#getting-started)
     -   [Local setup](#local-setup)
     -   [Installation](#installation)
+    -   [Configure Auth0](#configure-auth0)
     -   [Development mode](#development-mode)
         -   [Docker dev environment](#docker-dev-environment)
             -   [Debug containers](#debug-containers)
@@ -27,7 +28,11 @@ These are some of the tools to build the app
 -   Lerna
 -   Eslint/Prettier/EditorConfig
 -   Husky/Lint-staged
--   Jest/Supertest
+-   Jest/Supertest/Enzyme
+-   React/React-router
+-   Material-UI
+-   Auth0
+-   Express-Gateway
 -   Express
 -   MongoDB/Mongoose
 -   Winston/Morgan/Sematext
@@ -38,9 +43,7 @@ These are some of the tools to build the app
 -   Codacy/Codeclimate
 -   Depfu
 -   Docker
--   Auth0
 -   Postman
--   Express-Gateway
 -   Heroku
 
 ## Getting started
@@ -74,6 +77,10 @@ Install dependencies
 
     npm install
     npm run bootstrap
+
+### Configure Auth0
+
+This system relies on Auth0 to handle Authentication, Authorization and manage the application users due to this you need to configure Auth0 first for development or production. To do that follow the steps on [Auth page](Auth.md).
 
 ### Development mode
 
@@ -157,7 +164,7 @@ After installing dependencies, to run tests, execute any of these commands:
 
 ### Interact with the APIs
 
-To send requests to the services with no UI, you can use Postman and import the collections that are in [tests-apis](./tests-apis) folder.
+To send requests to the services with no UI, you can use Postman and import the collections that are in [tests-apis](./assets/tests-apis) folder.
 
 Keep in mind that if you use the API Gateway collection you'll need to generate a valid JWT token from Auth0.
 
