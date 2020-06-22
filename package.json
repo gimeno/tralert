@@ -19,7 +19,7 @@
   },
   "author": "Roberto Gimeno",
   "devDependencies": {
-    "eslint": "6.6.0",
+    "eslint": "7.3.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.20.2",
@@ -30,7 +30,7 @@
     "eslint-plugin-react-hooks": "^4.0.4",
     "eslint-plugin-security": "^1.4.0",
     "husky": "^4.2.5",
-    "jest": "24.9.0",
+    "jest": "26.0.1",
     "lerna": "^3.22.0",
     "lint-staged": "^10.2.9",
     "mongodb-memory-server": "^6.6.1",
