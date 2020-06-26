@@ -14,5 +14,6 @@ const config = createJestConfig(resolveReactScriptsModule, rootDir, isEjecting);
 module.exports = {
     ...config,
     displayName: 'web',
-    setupFilesAfterEnv: ['./src/setupTests.js']
+    setupFilesAfterEnv: ['./src/setupTests.js'],
+    coveragePathIgnorePatterns: ['/node_modules/', './src/assets', './src/utils']
 };

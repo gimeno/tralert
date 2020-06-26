@@ -2,25 +2,27 @@ version: '3'
 
 services:
   transport-service:
-    image: transport-service
-    container_name: transport-service-dev
+    image: tralert-transport-service-dev
+    container_name: tralert-transport-service-dev
     build:
       context: .
-      dockerfile: ./services/transport/Dockerfile.dev
+      dockerfile: ./services/transport/Dockerfile
     env_file: ./services/transport/.env
     ports:
       - '5000:5000'
       - '9229:9229'
+    command: npm --prefix services/transport run docker:dev
     volumes:
-      - .:/app
+      - ./packages:/app/packages
+      - ./services/transport:/app/services/transport
       - /app/node_modules
 
   alert-service:
-    image: alert-service
-    container_name: alert-service-dev
+    image: tralert-alert-service-dev
+    container_name: tralert-alert-service-dev
     build:
       context: .
-      dockerfile: ./services/alert/Dockerfile.dev
+      dockerfile: ./services/alert/Dockerfile
     env_file: ./services/alert/.env
     environment:
       - MONGODB_URI=mongodb://alert-service-db:27017/alerts
@@ -28,21 +30,23 @@ services:
     ports:
       - '5001:5001'
       - '9230:9229'
+    command: npm --prefix services/alert run docker:dev
     volumes:
-      - .:/app
+      - ./packages:/app/packages
+      - ./services/alert:/app/services/alert
       - /app/node_modules
     depends_on:
       - alert-service-db
 
   alert-service-db:
     image: mongo
-    container_name: alert-service-db-dev
+    container_name: tralert-alert-service-db-dev
     ports:
       - '27017:27017'
 
   gateway-service:
-    image: gateway-service
-    container_name: gateway-service-dev
+    image: tralert-gateway-service-dev
+    container_name: tralert-gateway-service-dev
     build:
       context: .
       dockerfile: ./services/gateway/Dockerfile
@@ -54,3 +58,17 @@ services:
       - '9080:9080'
     volumes:
       - ./services/gateway/config/gateway.config.yml:/var/lib/eg/gateway.config.yml
+
+  web-service:
+    image: tralert-web-service-dev
+    container_name: tralert-web-service-dev
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: ./services/web/Dockerfile.dev
+    env_file: ./services/web/.env
+    ports:
+      - '4000:4000'
+    volumes:
+      - ./services/web:/app/services/web
+      - /app/node_modules

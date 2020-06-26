@@ -2,7 +2,7 @@
 
 ## Features
 
--   Look trains in Renfe website
+-   Look trains in Renfe website by scrapping it
 
 ## Environment variables
 

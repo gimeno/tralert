@@ -53,3 +53,12 @@ deploy:
     script: bash deploy.sh production gateway
     on:
       branch: master
+  # Web app
+  - provider: script
+    script: bash deploy.sh development web
+    on:
+      branch: development
+  - provider: script
+    script: bash deploy.sh production web
+    on:
+      branch: master

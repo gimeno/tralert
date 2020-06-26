@@ -17,16 +17,14 @@ ENV CHROMIUM_PATH /usr/bin/chromium-browser
 
 WORKDIR /app
 
-# Install Lerna
+# Copy needed files
 COPY package.json .
-RUN npm install -g lerna
-
-# Copy packages and service code
+COPY lerna.json .
 COPY packages ./packages
 COPY services/transport ./services/transport
 
 # Bootstrap dependencies
-COPY lerna.json .
+RUN npm install -g lerna
 RUN npx lerna bootstrap --hoist --ignore-scripts -- --production --no-optional
 
 CMD [ "npm", "--prefix", "services/transport", "start" ]

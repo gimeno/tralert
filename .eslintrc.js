@@ -13,7 +13,6 @@ module.exports = {
         ecmaVersion: 2018
     },
     rules: {
-        'security/detect-object-injection': 'off',
         'no-unused-vars': [
             'error',
             {
@@ -27,6 +26,7 @@ module.exports = {
                 SwitchCase: 1
             }
         ],
+        'security/detect-object-injection': 'off',
         'import/no-extraneous-dependencies': 'off'
     }
 };
