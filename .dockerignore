@@ -5,8 +5,10 @@ node_modules
 packages/*/node_modules
 services/*/node_modules
 services/*/logs
-coverage
 logs
+coverage
 cc-test-reporter/
 codacy-coverage/
 package-lock.json
+*.md
+assets

@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  tralert-transport-service:
+  transport-service:
     image: tralert-transport-service
     container_name: tralert-transport-service
     build:
@@ -9,11 +9,11 @@ services:
       dockerfile: ./services/transport/Dockerfile
     env_file: .env
     environment:
-      - LOGS_TOKEN:${TRANSPORT_LOGS_TOKEN}
+      - LOGS_TOKEN=${TRANSPORT_LOGS_TOKEN}
     ports:
       - '5000:5000'
 
-  tralert-alert-service:
+  alert-service:
     image: tralert-alert-service
     container_name: tralert-alert-service
     build:
@@ -21,7 +21,7 @@ services:
       dockerfile: ./services/alert/Dockerfile
     env_file: .env
     environment:
-      - LOGS_TOKEN:${ALERT_LOGS_TOKEN}
+      - LOGS_TOKEN=${ALERT_LOGS_TOKEN}
       - MONGODB_URI=mongodb://tralert-alert-service-db:27017/alerts
       - TRANSPORT_SERVICE_URL=http://tralert-transport-service:5000
     ports:
@@ -29,13 +29,13 @@ services:
     depends_on:
       - alert-service-db
 
-  tralert-alert-service-db:
+  alert-service-db:
     image: mongo
     container_name: tralert-alert-service-db
     ports:
       - '27017:27017'
 
-  tralert-gateway-service:
+  gateway-service:
     image: tralert-gateway-service
     container_name: tralert-gateway-service
     build:
@@ -47,3 +47,16 @@ services:
       - ALERT_SERVICE_URL=http://tralert-alert-service:5001
     ports:
       - '9080:9080'
+
+  web-service:
+    image: tralert-web-service
+    container_name: tralert-web-service
+    build:
+      context: .
+      dockerfile: ./services/web/Dockerfile
+    env_file: .env
+    environment:
+      - REACT_APP_AUTH0_DOMAIN=${AUTH0_DOMAIN}
+      - PORT=4000
+    ports:
+      - '4000:4000'

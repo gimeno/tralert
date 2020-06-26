@@ -7,6 +7,8 @@
 
 Tralert is a web application that allows you to set alarms to let you know when a train will be available certain day for the limit price you set.
 
+This is primarily a learning project to brush up technologies that I use day to day as well as get to know new ones.
+
 -   [Build with](#build-with)
 -   [Getting started](#getting-started)
     -   [Local setup](#local-setup)
@@ -96,7 +98,7 @@ To be able to run the dev commands without problems, you'll need to have the fol
 
 Then you can run these commands
 
--   `npm run dev` - Runs all services executing each `dev` command inside of each service with `lerna run`
+-   `npm run dev` - Runs all services executing each `dev` command inside of each service with `lerna run`. For the web service, you have to run `npm run web -- start` the reason for not running within lerna run is this [issue](https://github.com/facebook/create-react-app/issues/8685) in CRA
 -   `npm run <service> -- run dev` - Runs a single service
 
 #### Docker dev environment
@@ -149,6 +151,7 @@ Firstly, setup these variables in an .env file
     AUTH0_AUDIENCE
     AUTH0_CLIENT_ID
     AUTH0_CLIENT_SECRET
+    REACT_APP_AUTH0_CLIENT_ID
 
 After that run `docker-compose -f docker-compose-prod.yml up`, `docker-compose-prod.yml` is configured to take the previous env variables and inject them into the appropriate container.
 

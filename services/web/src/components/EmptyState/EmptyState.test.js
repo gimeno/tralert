@@ -15,4 +15,17 @@ describe('<EmptyState />', () => {
         );
         expect(wrapper.find(HomeIcon).length).toBe(2);
     });
+
+    test('renders nothing if type is other than page or card', () => {
+        const wrapper = shallow(
+            <EmptyState
+                type=""
+                image={<HomeIcon />}
+                title="Page doesn’t exist"
+                description="The page you’re trying to access doesn’t exist"
+                button={<HomeIcon />}
+            />
+        );
+        expect(wrapper.find(HomeIcon).length).toBe(0);
+    });
 });

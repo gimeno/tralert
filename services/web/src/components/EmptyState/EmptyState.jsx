@@ -2,36 +2,69 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, Typography } from '@material-ui/core';
 
-function EmptyState(props) {
-    let imageWidth;
-    let imageHeight;
-    let variant;
+function getComponentContent(props, sizeProps) {
+    const { imageWidth, imageHeight, variant } = sizeProps;
+    return (
+        <>
+            {props.image && (
+                <Box
+                    clone
+                    mb={props.title || props.description ? 2 : 0}
+                    width={`${imageWidth}%`}
+                    height={`${imageHeight}%`}
+                >
+                    {props.image}
+                </Box>
+            )}
 
-    switch (props.size) {
+            {props.title && (
+                <Box mb={!props.description && props.button ? 2 : 0}>
+                    <Typography variant={variant}>{props.title}</Typography>
+                </Box>
+            )}
+
+            {props.description && (
+                <Box mb={props.button && 2}>
+                    <Typography variant="body1">{props.description}</Typography>
+                </Box>
+            )}
+
+            {props.button && props.button}
+        </>
+    );
+}
+
+function getSizeProps(size) {
+    const result = {};
+
+    switch (size) {
         case 'small':
-            imageWidth = 40;
-            imageHeight = 40;
-            variant = 'h6';
+            result.imageWidth = 40;
+            result.imageHeight = 40;
+            result.variant = 'h6';
             break;
-
         case 'medium':
-            imageWidth = 60;
-            imageHeight = 60;
-            variant = 'h5';
+            result.imageWidth = 60;
+            result.imageHeight = 60;
+            result.variant = 'h5';
             break;
-
         case 'large':
-            imageWidth = 100;
-            imageHeight = 100;
-            variant = 'h4';
+            result.imageWidth = 100;
+            result.imageHeight = 100;
+            result.variant = 'h4';
             break;
-
         default:
-            imageWidth = 60;
-            imageHeight = 60;
-            variant = 'h5';
+            result.imageWidth = 60;
+            result.imageHeight = 60;
+            result.variant = 'h5';
             break;
     }
+
+    return result;
+}
+
+function EmptyState(props) {
+    const sizeProps = getSizeProps(props.size);
 
     if (props.type === 'page') {
         return (
@@ -42,30 +75,7 @@ function EmptyState(props) {
                 left="50%"
                 textAlign="center"
             >
-                {props.image && (
-                    <Box
-                        clone
-                        mb={props.title || props.description ? 2 : 0}
-                        width={`${imageWidth}%`}
-                        height={`${imageHeight}%`}
-                    >
-                        {props.image}
-                    </Box>
-                )}
-
-                {props.title && (
-                    <Box mb={!props.description && props.button ? 2 : 0}>
-                        <Typography variant={variant}>{props.title}</Typography>
-                    </Box>
-                )}
-
-                {props.description && (
-                    <Box mb={props.button && 2}>
-                        <Typography variant="body1">{props.description}</Typography>
-                    </Box>
-                )}
-
-                {props.button && props.button}
+                {getComponentContent(props, sizeProps)}
             </Box>
         );
     }
@@ -73,30 +83,7 @@ function EmptyState(props) {
     if (props.type === 'card') {
         return (
             <Box padding={props.padding} textAlign="center">
-                {props.image && (
-                    <Box
-                        clone
-                        mb={props.title || props.description ? 2 : 0}
-                        width={`${imageWidth}%`}
-                        height={`${imageHeight}%`}
-                    >
-                        {props.image}
-                    </Box>
-                )}
-
-                {props.title && (
-                    <Box mb={!props.description && props.button ? 2 : 0}>
-                        <Typography variant={variant}>{props.title}</Typography>
-                    </Box>
-                )}
-
-                {props.description && (
-                    <Box mb={props.button && 2}>
-                        <Typography variant="body1">{props.description}</Typography>
-                    </Box>
-                )}
-
-                {props.button && props.button}
+                {getComponentContent(props, sizeProps)}
             </Box>
         );
     }
