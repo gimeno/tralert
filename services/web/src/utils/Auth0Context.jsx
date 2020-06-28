@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import env from '@beam-australia/react-env';
 import createAuth0Client from '@auth0/auth0-spa-js';
 
 const AUTH0_OPTIONS = {
-    domain: process.env.REACT_APP_AUTH0_DOMAIN,
-    client_id: process.env.REACT_APP_AUTH0_CLIENT_ID,
+    domain: env('AUTH0_DOMAIN'),
+    client_id: env('AUTH0_CLIENT_ID'),
     redirect_uri: window.location.origin
 };
 
@@ -79,7 +80,7 @@ export const Auth0Provider = ({ children }) => {
                 loginWithRedirect: (...p) => auth0Client.loginWithRedirect(...p),
                 getTokenSilently: (...p) => auth0Client.getTokenSilently(...p),
                 getTokenWithPopup: (...p) => auth0Client.getTokenWithPopup(...p),
-                logout: (...p) => auth0Client.logout(...p)
+                logout: () => auth0Client.logout({ returnTo: AUTH0_OPTIONS.redirect_uri })
             }}
         >
             {children}

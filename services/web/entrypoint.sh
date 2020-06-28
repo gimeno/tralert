@@ -1,9 +1,7 @@
 #!/bin/bash
 
-cd services/web/
+# Generate enviroment variables
+npx react-env --dest build
 
-echo "===> Building ..."
-npm run build
-
-echo "===> Running ... "
+# Execute serve with build files
 exec serve -s build

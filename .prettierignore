@@ -3,3 +3,4 @@ coverage
 *.yml
 assets/tests-apis
 .eslintrc.js
+env.js

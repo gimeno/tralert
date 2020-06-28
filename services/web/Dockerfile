@@ -2,19 +2,16 @@ FROM node:12.16.2-alpine
 
 WORKDIR /app
 
-# Copy needed files
-COPY package.json .
-COPY lerna.json .
-COPY .eslintrc.js .
-COPY .prettierrc.js .
-COPY services/web ./services/web
+# Copy code
+COPY services/web .
 
-# Bootstrap dependencies
-RUN npm install -g lerna
-RUN npx lerna bootstrap --hoist 
+# install and cache app dependencies
+RUN npm install --production
+RUN npm install -g serve
 
-# Install serve
-RUN npm install -g serve --silent
+# build react app
+RUN npm run build
 
-RUN chmod +x ./services/web/entrypoint.sh
-CMD [ "sh", "./services/web/entrypoint.sh" ]
+# start app
+RUN chmod +x ./entrypoint.sh
+CMD [ "sh", "./entrypoint.sh" ]
