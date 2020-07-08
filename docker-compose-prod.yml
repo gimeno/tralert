@@ -56,6 +56,7 @@ services:
       dockerfile: ./services/web/Dockerfile
     env_file: .env
     environment:
+      - NODE_ENV=production
       - REACT_APP_AUTH0_DOMAIN=${AUTH0_DOMAIN}
       - PORT=4000
     ports:

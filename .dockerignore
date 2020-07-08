@@ -12,3 +12,4 @@ codacy-coverage/
 package-lock.json
 *.md
 assets
+env.js
