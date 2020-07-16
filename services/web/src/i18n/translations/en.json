@@ -1,0 +1,11 @@
+{
+  "component.language-chooser.en": "English",
+  "component.language-chooser.es": "Spanish",
+  "component.navbar.login": "Log in",
+  "component.navbar.alerts": "Alerts",
+  "component.navbar.profile": "Profile",
+  "component.navbar.logout": "Logout",
+  "page.not-found.page-does-not-exist": "Page doesn’t exist",
+  "page.not-found.page-does-not-exist-message": "The page you’re trying to access doesn’t exist",
+  "page.not-found.home": "Home"
+}

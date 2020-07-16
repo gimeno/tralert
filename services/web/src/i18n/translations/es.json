@@ -1,0 +1,11 @@
+{
+  "component.language-chooser.en": "Inglés",
+  "component.language-chooser.es": "Español",
+  "component.navbar.login": "Iniciar sesión",
+  "component.navbar.alerts": "Alertas",
+  "component.navbar.profile": "Perfil",
+  "component.navbar.logout": "Cerrar sesión",
+  "page.not-found.page-does-not-exist": "La página no existe",
+  "page.not-found.page-does-not-exist-message": "La página que esta intentando acceder no existe",
+  "page.not-found.home": "Inicio"
+}
