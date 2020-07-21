@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import { Translate as LanguageIcon, ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
-
-const LANGUAGES = ['en', 'es'];
 
 const useStyles = makeStyles((theme) => ({
     languageButtonText: {
@@ -20,6 +18,12 @@ function LanguageChooser() {
     const classes = useStyles();
     const { t, i18n } = useTranslation();
     const [languageMenu, setLanguageMenu] = useState(null);
+
+    const supportedLanguages = useMemo(
+        () => i18n.options.supportedLngs.filter((lang) => lang !== 'cimode'),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        []
+    );
 
     const handleLanguageIconClick = (event) => {
         setLanguageMenu(event.currentTarget);
@@ -40,7 +44,7 @@ function LanguageChooser() {
                 <ExpandMoreIcon fontSize="small" />
             </Button>
             <Menu anchorEl={languageMenu} open={Boolean(languageMenu)} onClose={handleLanguageMenuClose}>
-                {LANGUAGES.map((language) => (
+                {supportedLanguages.map((language) => (
                     <MenuItem
                         key={language}
                         lang={language}

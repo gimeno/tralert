@@ -1,14 +1,12 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import { I18nextProvider } from 'react-i18next';
-
-import i18next from './i18n/i18next';
 import App from './App/App';
+import './i18n/i18next';
 import './index.css';
 
 ReactDOM.render(
-    <I18nextProvider i18n={i18next}>
+    <Suspense fallback="loading">
         <App />
-    </I18nextProvider>,
+    </Suspense>,
     document.getElementById('root')
 );

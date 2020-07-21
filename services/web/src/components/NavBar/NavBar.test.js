@@ -16,7 +16,7 @@ describe('<NavBar />', () => {
         });
 
         const wrapper = shallow(<NavBar />);
-        expect(wrapper.text().includes('Log in')).toBe(true);
+        expect(wrapper.text().includes('component.navbar.login')).toBe(true);
 
         wrapper.find(Button).simulate('click');
         expect(loginWithRedirect).toHaveBeenCalled();

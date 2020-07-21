@@ -12,6 +12,7 @@ module.exports = {
         }
     },
     rules: {
+        'no-console': ["warn", { allow: ["warn", "error"] }],
         'security/detect-non-literal-fs-filename': 'off',
         'import/extensions': 'off',
         'import/no-unresolved': 'off'
