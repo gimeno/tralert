@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Button, Box, IconButton, Typography } from '@material-ui/core';
 import { Commute, MoreVert as MoreIcon, Person, ExitToApp, Notifications } from '@material-ui/icons';
 import UserAvatar from '../UserAvatar/UserAvatar';
 import MenuBar from '../MenuBar/MenuBar';
+import LanguageChooser from '../LanguageChooser/LanguageChooser';
 import { useAuth0 } from '../../utils/Auth0Context';
 
 const useStyles = makeStyles((theme) => ({
@@ -29,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 function NavBar() {
     const classes = useStyles();
+    const { t } = useTranslation();
     const { isAuthenticated, loading, user, loginWithRedirect, logout } = useAuth0();
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -52,17 +55,17 @@ function NavBar() {
 
     const menuItems = [
         {
-            name: 'Alerts',
+            name: t('component.navbar.alerts'),
             to: '/alerts',
             icon: <Notifications />
         },
         {
-            name: 'Profile',
+            name: t('component.navbar.profile'),
             to: '/profile',
             icon: <Person />
         },
         {
-            name: 'Logout',
+            name: t('component.navbar.logout'),
             divide: true,
             icon: <ExitToApp />,
             onClick: logout
@@ -83,9 +86,10 @@ function NavBar() {
                         </Typography>
                     </Link>
                 </Box>
+                <LanguageChooser />
                 {!loading && !isAuthenticated && (
                     <Button disabled={loading} color="inherit" onClick={() => loginWithRedirect({})}>
-                        Log in
+                        {t('component.navbar.login')}
                     </Button>
                 )}
                 {!loading && isAuthenticated && (

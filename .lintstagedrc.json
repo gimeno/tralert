@@ -1,4 +1,4 @@
 {
-  "*.{js|jx}": ["eslint", "jest --findRelatedTests"],
-  "*.{js|jsx|json}": "prettier"
+  "*.{js,jsx}": ["eslint", "jest --findRelatedTests"],
+  "*": "prettier"
 }
