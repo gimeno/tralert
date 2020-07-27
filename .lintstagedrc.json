@@ -1,4 +1,4 @@
 {
   "*.{js,jsx}": ["eslint", "jest --findRelatedTests"],
-  "*": "prettier"
+  "*": "npm run prettier"
 }

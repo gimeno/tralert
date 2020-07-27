@@ -1,4 +1,6 @@
 {
+  "component.error-boundary.title": "Something went wrong",
+  "component.error-boundary.description": "The app failed to load",
   "component.language-chooser.en": "English",
   "component.language-chooser.es": "Spanish",
   "component.navbar.login": "Log in",

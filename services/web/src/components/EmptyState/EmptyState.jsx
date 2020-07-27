@@ -94,7 +94,8 @@ function EmptyState(props) {
 EmptyState.defaultProps = {
     type: 'page',
     size: 'medium',
-    padding: 2
+    padding: 2,
+    button: undefined
 };
 
 EmptyState.propTypes = {
@@ -104,7 +105,7 @@ EmptyState.propTypes = {
     image: PropTypes.element.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    button: PropTypes.element.isRequired
+    button: PropTypes.element
 };
 
 export default EmptyState;

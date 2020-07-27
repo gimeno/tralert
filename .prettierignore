@@ -1,6 +1,6 @@
 node_modules
 coverage
 *.yml
-assets/tests-apis
+assets
 .eslintrc.js
 env.js
