@@ -1,4 +1,6 @@
 {
+  "component.error-boundary.title": "Algo fue mal",
+  "component.error-boundary.description": "La applicación falló mientras estaba cargando",
   "component.language-chooser.en": "Inglés",
   "component.language-chooser.es": "Español",
   "component.navbar.login": "Iniciar sesión",

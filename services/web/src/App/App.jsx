@@ -5,6 +5,7 @@ import { Auth0Provider } from '../utils/Auth0Context';
 
 import Theme from '../components/Theme/Theme';
 import NavBar from '../components/NavBar/NavBar';
+import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 import Routes from '../pages/Routes/Routes';
 
 function App() {
@@ -16,7 +17,9 @@ function App() {
                 <BrowserRouter>
                     <Auth0Provider>
                         <NavBar />
-                        <Routes />
+                        <ErrorBoundary>
+                            <Routes />
+                        </ErrorBoundary>
                     </Auth0Provider>
                 </BrowserRouter>
             </Theme>
