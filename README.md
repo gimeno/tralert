@@ -33,6 +33,8 @@ These are some of the tools to build the app
 -   Jest/Supertest/Enzyme
 -   React/React-router
 -   Material-UI
+-   formik
+-   i18next
 -   Auth0
 -   Express-Gateway
 -   Express

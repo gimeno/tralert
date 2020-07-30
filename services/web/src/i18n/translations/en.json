@@ -9,5 +9,13 @@
   "component.navbar.logout": "Logout",
   "page.not-found.page-does-not-exist": "Page doesn’t exist",
   "page.not-found.page-does-not-exist-message": "The page you’re trying to access doesn’t exist",
-  "page.not-found.home": "Home"
+  "page.not-found.home": "Home",
+  "page.profile.cancel": "Cancel",
+  "page.profile.edit-email": "Edit email",
+  "page.profile.email": "Email",
+  "page.profile.invalid-email": "Invalid email address",
+  "page.profile.name": "Name",
+  "page.profile.required": "Required",
+  "page.profile.save": "Save",
+  "page.profile.title": "User Information"
 }
