@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 function NavBar() {
     const classes = useStyles();
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const { isAuthenticated, loading, user, loginWithRedirect, logout } = useAuth0();
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -88,7 +88,11 @@ function NavBar() {
                 </Box>
                 <LanguageChooser />
                 {!loading && !isAuthenticated && (
-                    <Button disabled={loading} color="inherit" onClick={() => loginWithRedirect({})}>
+                    <Button
+                        disabled={loading}
+                        color="inherit"
+                        onClick={() => loginWithRedirect({ ui_locales: i18n.language })}
+                    >
                         {t('component.navbar.login')}
                     </Button>
                 )}

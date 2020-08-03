@@ -15,5 +15,5 @@ module.exports = {
     ...config,
     displayName: 'web',
     setupFilesAfterEnv: ['./src/setupTests.js'],
-    coveragePathIgnorePatterns: ['/node_modules/', './src/assets', './src/utils']
+    coveragePathIgnorePatterns: ['/node_modules/', './src/assets', './src/utils', './src/i18n']
 };
