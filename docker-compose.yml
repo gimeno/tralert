@@ -44,6 +44,22 @@ services:
     ports:
       - '27017:27017'
 
+  auth-service:
+    image: tralert-auth-service-dev
+    container_name: tralert-auth-service-dev
+    build:
+      context: .
+      dockerfile: ./services/auth/Dockerfile
+    env_file: ./services/auth/.env
+    ports:
+      - '5002:5002'
+      - '9231:9229'
+    command: npm --prefix services/auth run docker:dev
+    volumes:
+      - ./packages:/app/packages
+      - ./services/auth:/app/services/auth
+      - /app/node_modules
+
   gateway-service:
     image: tralert-gateway-service-dev
     container_name: tralert-gateway-service-dev
@@ -54,6 +70,7 @@ services:
     environment:
       - TRANSPORT_SERVICE_URL=http://transport-service:5000
       - ALERT_SERVICE_URL=http://alert-service:5001
+      - AUTH_SERVICE_URL=http://auth-service:5002
     ports:
       - '9080:9080'
     volumes:

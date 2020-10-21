@@ -16,6 +16,7 @@ These env variables are supported by the service.
 | `DEBUG`                 | Set value `express-gateway-plugin-jwks:jwks-policy` if you want to debug jwks plugin |
 | `TRANSPORT_SERVICE_URL` | URL of Transport service                                                             |
 | `ALERT_SERVICE_URL`     | URL of Alert service                                                                 |
+| `AUTH_SERVICE_URL`      | URL of Auth service                                                                  |
 | `AUTH0_DOMAIN`          | AUTH0 Domain to validate JWT token                                                   |
 | `AUTH0_AUDIENCE`        | AUTH0 Audience to validate JWT token                                                 |
 
@@ -25,6 +26,7 @@ For development, you can create `.env` file with the following configuration
     DEBUG=express-gateway-plugin-jwks:jwks-policy
     TRANSPORT_SERVICE_URL=http://<YOUR_URL>:5000/
     ALERT_SERVICE_URL=http://<YOUR_URL>:5001/
+    AUTH_SERVICE_URL=http://<YOUR_URL>:5002/
     AUTH0_DOMAIN=<YOUR AUTH0 DOMAIN>
     AUTH0_AUDIENCE=<YOUR AUTH0 AUDIENCE>
 
@@ -32,5 +34,6 @@ For production, you need to set:
 
     TRANSPORT_SERVICE_URL
     ALERT_SERVICE_URL
+    AUTH_SERVICE_URL
     AUTH0_DOMAIN
     AUTH0_AUDIENCE

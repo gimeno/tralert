@@ -6,11 +6,15 @@ apiEndpoints:
     methods: GET
   alert:
     path: '/alert*'
+  auth:
+    path: '/auth*'
 serviceEndpoints:
   transport:
     url: ${TRANSPORT_SERVICE_URL}
   alert:
     url: ${ALERT_SERVICE_URL}
+  auth:
+    url: ${AUTH_SERVICE_URL}
 policies:
   - log
   - proxy
@@ -45,4 +49,17 @@ pipelines:
       - proxy:
           action:
             serviceEndpoint: alert
+            stripPath: true
+
+  authPipeline:
+    apiEndpoints:
+      - auth
+    policies:
+      - log:
+          action:
+            message: 'Auth ${req.method} ${req.originalUrl}'
+      - jwks:
+      - proxy:
+          action:
+            serviceEndpoint: auth
             stripPath: true
