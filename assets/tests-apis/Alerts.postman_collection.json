@@ -6,6 +6,25 @@
 	},
 	"item": [
 		{
+			"name": "Health check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/ok",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"ok"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Create alert",
 			"request": {
 				"method": "POST",

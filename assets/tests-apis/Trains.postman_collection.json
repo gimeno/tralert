@@ -6,20 +6,44 @@
 	},
 	"item": [
 		{
+			"name": "Health check",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/ok",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"ok"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get trains",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
 				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODgwMjAyMTcsImlhdCI6MTU4NjgxMDYxNywidWlkIjoiNWU5NGNkMjQ3YzI1NTU3NjljYmI3MWM4In0.fUnrMjg82w421LbdZB2E0HjjQeRQx9GCIhbf1TUpOno",
-						"type": "text",
-						"disabled": true
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": "",

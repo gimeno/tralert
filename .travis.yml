@@ -44,6 +44,15 @@ deploy:
     script: bash deploy.sh production alert
     on:
       branch: master
+  # Auth app
+  - provider: script
+    script: bash deploy.sh development auth
+    on:
+      branch: development
+  - provider: script
+    script: bash deploy.sh production auth
+    on:
+      branch: master
   # Api gateway
   - provider: script
     script: bash deploy.sh development gateway

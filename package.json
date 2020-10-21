@@ -5,6 +5,7 @@
   "scripts": {
     "bootstrap": "lerna clean --yes && lerna bootstrap --hoist",
     "alert": "npm --prefix services/alert",
+    "auth": "npm --prefix services/auth",
     "transport": "npm --prefix services/transport",
     "web": "npm --prefix services/web",
     "dev": "lerna run dev --stream",

@@ -92,7 +92,7 @@ Create an .env file in each service folder and set the needed env variables (Che
 
 To be able to run the dev commands without problems, you'll need to have the following running in your local machine:
 
--   A MongoDB instance
+-   A MongoDB instance that runs in the default MongoDB port (27017)
 -   Create a docker image based on Express-Gateway with the Dockerfile in `/services/gateway` and run it. To do that run the following commands from root folder in a bash terminal
     -   `cd services/gateway/`
     -   `./docker-build.sh`
@@ -132,6 +132,17 @@ The service containers run the command `docker:dev` which runs the node process 
         "remoteRoot": "/app",
         "protocol": "inspector",
         "restart": true
+    },
+    {
+        "name": "Docker: Auth service",
+        "type": "node",
+        "request": "attach",
+        "port": 9231,
+        "address": "localhost",
+        "localRoot": "${workspaceFolder}",
+        "remoteRoot": "/app",
+        "protocol": "inspector",
+        "restart": true
     }
 
 With that once the containers are running, you can start debugging one of the services clicking on the play button on the run page in VSCode.
@@ -142,17 +153,29 @@ The `start` commands in each service are ready to start services as if their env
 
 Firstly, setup these variables in an .env file
 
+    # Common variables
+    AUTH0_DOMAIN
+    AUTH0_AUDIENCE
+
+    # Transport service variables
     TRANSPORT_LOGS_TOKEN
+
+    # Alert service variables
     ALERT_LOGS_TOKEN
+    ALERT_AUTH0_CLIENT_ID
+    ALERT_AUTH0_CLIENT_SECRET
     SMTP_HOST
     SMTP_PORT
     SMTP_USERNAME
     SMTP_PASSWORD
     EMAIL_FROM
-    AUTH0_DOMAIN
-    AUTH0_AUDIENCE
-    AUTH0_CLIENT_ID
-    AUTH0_CLIENT_SECRET
+
+    # Auth service variables
+    AUTH_LOGS_TOKEN
+    AUTH_AUTH0_CLIENT_ID
+    AUTH_AUTH0_CLIENT_SECRET
+
+    # Web service variables
     REACT_APP_AUTH0_CLIENT_ID
 
 After that run `docker-compose -f docker-compose-prod.yml up`, `docker-compose-prod.yml` is configured to take the previous env variables and inject them into the appropriate container.

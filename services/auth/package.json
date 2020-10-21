@@ -1,0 +1,25 @@
+{
+  "name": "@tralert/auth",
+  "version": "1.0.0",
+  "description": "Service to interact with Auth0",
+  "author": "Roberto Gimeno",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon -r dotenv/config --watch ../../packages --watch . src/server.js",
+    "debug": "nodemon -r dotenv/config --inspect --watch ../../packages --watch . src/server.js",
+    "docker:dev": "nodemon -r dotenv/config --inspect=0.0.0.0 --watch ../../packages --watch . src/server.js"
+  },
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "@tralert/config": "^1.0.0",
+    "@tralert/express-app": "^1.0.0",
+    "@tralert/logger": "^1.0.0",
+    "@tralert/middlewares": "^1.0.0",
+    "@tralert/utils": "^1.0.0",
+    "auth0": "^2.26.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "http-status": "^1.4.2",
+    "nodemon": "^2.0.4"
+  }
+}
