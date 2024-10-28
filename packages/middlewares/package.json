@@ -7,7 +7,7 @@
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "@tralert/utils": "^1.0.0",
-    "http-status": "^1.4.2",
+    "http-status": "^2.0.0",
     "lodash.pick": "^4.4.0"
   },
   "devDependencies": {
